@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { PACKAGE_TOPICS, TOPIC_ANCHORS, packages } from "../lib/packages";
+import { packages } from "../lib/packages";
 import { ChevronRightIcon } from "./icons";
 
 export default function Packages() {
@@ -9,7 +9,7 @@ export default function Packages() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mx-auto max-w-xl text-center">
           <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-            Whale Snorkeling Packages
+            Whale & Dolphin Tours
           </span>
           <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl">
             Choose Your Adventure
@@ -39,15 +39,31 @@ export default function Packages() {
                 <h3 className="text-lg font-semibold transition-colors hover:text-accent">
                   {pkg.name}
                 </h3>
-                <span className="text-4xl font-bold tracking-tight">
-                  <span className="mr-1 align-top text-lg font-semibold text-body">
-                    USD
-                  </span>
-                  {pkg.price}
-                </span>
-                <span className="text-xs uppercase tracking-[0.1em] text-body">
-                  Per Person
-                </span>
+                {pkg.price.kind === "flat" ? (
+                  <>
+                    <span className="text-4xl font-bold tracking-tight">
+                      <span className="mr-1 align-top text-lg font-semibold text-body">
+                        USD
+                      </span>
+                      {pkg.price.price}
+                    </span>
+                    <span className="text-xs uppercase tracking-[0.1em] text-body">
+                      {pkg.price.unit}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-4xl font-bold tracking-tight">
+                      <span className="mr-1 align-top text-lg font-semibold text-body">
+                        From USD
+                      </span>
+                      {pkg.price.tiers[0].price}
+                    </span>
+                    <span className="text-xs uppercase tracking-[0.1em] text-body">
+                      2&ndash;4 Persons
+                    </span>
+                  </>
+                )}
               </Link>
 
               <Link
@@ -67,7 +83,7 @@ export default function Packages() {
                 aria-label={`${pkg.name} package details`}
                 className="mt-6 flex flex-1 flex-col gap-0.5 border-t border-border/70 pt-2"
               >
-                {PACKAGE_TOPICS.map((topic) => (
+                {pkg.topics.map((topic) => (
                   <Link
                     key={topic.anchor}
                     href={`/packages/${pkg.slug}#${topic.anchor}`}
@@ -80,7 +96,7 @@ export default function Packages() {
               </nav>
 
               <Link
-                href={`/packages/${pkg.slug}#${TOPIC_ANCHORS.price}`}
+                href={`/packages/${pkg.slug}#price`}
                 className={`mt-8 rounded-full px-6 py-3.5 text-center text-sm font-semibold transition-colors ${
                   pkg.popular
                     ? "bg-accent text-white hover:bg-accent-dark"

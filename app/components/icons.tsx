@@ -254,6 +254,27 @@ export function PinIcon({ className }: IconProps) {
   );
 }
 
+export function CardIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="6" width="18" height="13" rx="2" />
+      <path d="M3 10h18" />
+      <path d="M7 15h4" />
+    </svg>
+  );
+}
+
 export function CameraIcon({ className }: IconProps) {
   return (
     <svg
