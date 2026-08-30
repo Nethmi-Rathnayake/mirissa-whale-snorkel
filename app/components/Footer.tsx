@@ -1,9 +1,10 @@
+import Link from "next/link";
 import NewsletterForm from "./NewsletterForm";
 
 const QUICK_LINKS = [
-  { label: "Our Journey", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Where We Are", href: "#contact" },
+  { label: "Our Journey", href: "/about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Where We Are", href: "/contact" },
 ];
 
 const LEGAL_LINKS = [
@@ -53,12 +54,12 @@ export default function Footer() {
             <ul className="mt-5 flex flex-col gap-3 text-sm">
               {QUICK_LINKS.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-ink/85 transition-colors hover:text-accent"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

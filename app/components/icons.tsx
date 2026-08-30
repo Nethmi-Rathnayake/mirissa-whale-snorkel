@@ -254,6 +254,168 @@ export function PinIcon({ className }: IconProps) {
   );
 }
 
+export function ShieldIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 3 4 6v6c0 4.5 3.1 7.9 8 9 4.9-1.1 8-4.5 8-9V6l-8-3Z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  );
+}
+
+export function LeafIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 4c0 9-5 14-14 14H4c0-9 5-14 14-14h2Z" />
+      <path d="M5 19c4-4 7-7 13-13" />
+    </svg>
+  );
+}
+
+export function DataIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 19V10M12 19V5M20 19v-6" />
+    </svg>
+  );
+}
+
+export function PhoneIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2 2C10.5 20 4 13.5 4 6a2 2 0 0 1 1-2Z" />
+    </svg>
+  );
+}
+
+export function MailIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="m4 7 8 6 8-6" />
+    </svg>
+  );
+}
+
+export function ShareIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="6" cy="12" r="2.5" />
+      <circle cx="18" cy="6" r="2.5" />
+      <circle cx="18" cy="18" r="2.5" />
+      <path d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6" />
+    </svg>
+  );
+}
+
+export function HelpCircleIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1 .9-1 1.7" />
+      <path d="M12 17h.01" />
+    </svg>
+  );
+}
+
+export function LifeBuoyIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="3.5" />
+      <path d="m7.2 7.2 2.5 2.5M14.3 14.3l2.5 2.5M16.8 7.2l-2.5 2.5M9.7 14.3l-2.5 2.5" />
+    </svg>
+  );
+}
+
 export function CardIcon({ className }: IconProps) {
   return (
     <svg
