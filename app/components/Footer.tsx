@@ -49,12 +49,20 @@ const LEGAL_LINKS = [
 export default function Footer() {
   return (
     <footer className="relative bg-[#3F2A1C] text-ivory">
-      <div
-        className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-accent to-transparent"
+      <svg
+        className="absolute inset-x-0 top-0 h-10 w-full -translate-y-full sm:h-14"
+        viewBox="0 0 1440 100"
+        preserveAspectRatio="none"
         aria-hidden="true"
-      />
-      <div className="px-6 py-16 sm:py-20 lg:px-16">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.9fr_1.1fr_1.1fr]">
+      >
+        <path
+          d="M0 60C240 10 480 100 720 80C960 60 1200 0 1440 50V100H0Z"
+          fill="#3F2A1C"
+        />
+      </svg>
+
+      <div className="relative z-10 px-6 py-10 sm:py-12 lg:px-16">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.9fr_1.1fr_1.1fr]">
           <div>
             <div className="flex items-center gap-2.5">
               <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full">
@@ -151,7 +159,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-ivory/50 sm:flex-row">
+        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs text-ivory/50 sm:flex-row">
           <p>© 2026 Mirissa Whale Snorkel. All rights reserved.</p>
           <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {LEGAL_LINKS.map((link) => (

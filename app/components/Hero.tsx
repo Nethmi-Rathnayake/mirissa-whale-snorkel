@@ -106,7 +106,7 @@ export default function Hero() {
 
       <div className="relative z-10 w-full px-6 lg:px-16">
         <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#040f1a]/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+          <span className="mt-[20px] inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#040f1a]/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white backdrop-blur-sm">
             <WhaleTailIcon className="h-3.5 w-3.5 text-[#5EC8F0]" />
             Whale Watching in Mirissa
           </span>
@@ -116,7 +116,7 @@ export default function Hero() {
               Dive Into The Deep Blue Sea
             </span>
             <span className="block text-white">And See The World&rsquo;s</span>
-            <span className="block whitespace-nowrap text-[#E0BF00]">
+            <span className="block whitespace-nowrap text-[clamp(1.75rem,8vw,4rem)] text-[#E0BF00]">
               <span aria-hidden="true">
                 {typedText}
                 <span

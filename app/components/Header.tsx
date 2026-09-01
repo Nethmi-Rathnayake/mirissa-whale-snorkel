@@ -8,8 +8,7 @@ import { CloseIcon, MenuIcon, UserIcon } from "./icons";
 
 const NAV_LINKS = [
   { label: "Home", href: "/", hash: "" },
-  { label: "Experience", href: "/#experience", hash: "#experience" },
-  { label: "Packages", href: "/#packages", hash: "#packages" },
+  { label: "Packages", href: "/packages", hash: "" },
   { label: "Gallery", href: "/#gallery", hash: "#gallery" },
   { label: "About", href: "/about", hash: "" },
   { label: "FAQ", href: "/faq", hash: "" },
@@ -60,37 +59,39 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-5 text-sm font-[705] text-ink/80 lg:flex xl:gap-9">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setHash(link.hash)}
-              className={`transition-colors hover:text-ink ${
-                link.label === activeLabel
-                  ? "border-b-2 border-ink pb-1 text-ink"
-                  : ""
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden items-center gap-8 lg:flex xl:gap-12">
+          <nav className="flex items-center gap-5 text-sm font-[705] text-ink/80 xl:gap-9">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setHash(link.hash)}
+                className={`transition-colors hover:text-ink ${
+                  link.label === activeLabel
+                    ? "border-b-2 border-ink pb-1 text-ink"
+                    : ""
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
 
-        <div className="hidden items-center gap-4 lg:flex">
-          <Link
-            href="/#packages"
-            className="rounded-full bg-ink px-6 py-2.5 text-sm font-medium text-ivory transition-colors hover:bg-ink/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-          >
-            Book Now
-          </Link>
-          <button
-            type="button"
-            aria-label="Account"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-ink transition-colors hover:bg-border"
-          >
-            <UserIcon />
-          </button>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/#packages"
+              className="rounded-full bg-ink px-6 py-2.5 text-sm font-medium text-ivory transition-colors hover:bg-ink/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            >
+              Book Now
+            </Link>
+            <button
+              type="button"
+              aria-label="Account"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-ink transition-colors hover:bg-border"
+            >
+              <UserIcon />
+            </button>
+          </div>
         </div>
 
         <button

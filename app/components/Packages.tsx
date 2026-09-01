@@ -9,7 +9,7 @@ export default function Packages() {
     <section id="packages" className="bg-ivory py-24 sm:py-28">
       <div className="px-6 lg:px-16">
         <div className="mx-auto text-center">
-          <span className="text-xs font-bold uppercase tracking-[0.18em] text-accent">
+          <span className="text-[17px] font-bold uppercase tracking-[0.18em] text-accent">
             Whale & Dolphin Tours
           </span>
           <h2 className="mt-3 whitespace-nowrap font-inter text-[clamp(1.5rem,6.2vw,3.75rem)] font-bold tracking-tight">

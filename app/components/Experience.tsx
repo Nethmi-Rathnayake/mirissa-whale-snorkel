@@ -1,21 +1,21 @@
 import Image from "next/image";
-import { ArrowRightIcon, CameraIcon, GuideIcon, VesselIcon } from "./icons";
+import { ArrowRightIcon } from "./icons";
 
 const FEATURES = [
   {
-    icon: VesselIcon,
+    image: "/images/vessel-icon.png",
     title: "Premium Vessels",
     description:
       "Safe, spacious and comfortable cruising for a smooth and stable journey.",
   },
   {
-    icon: GuideIcon,
+    image: "/images/guide-icon.png",
     title: "Marine Biologist Guides",
     description:
       "Learn from the experts about whales and the magic of conservation in our oceans.",
   },
   {
-    icon: CameraIcon,
+    image: "/images/camera-icon.png",
     title: "Unforgettable Moments",
     description:
       "From whales to sunsets, we capture the memories that will last a lifetime.",
@@ -27,11 +27,12 @@ export default function Experience() {
     <section id="experience" className="bg-ivory py-24 sm:py-28">
       <div className="grid gap-16 px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-16">
         <div>
-          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+          <span className="text-[17px] font-bold uppercase tracking-[0.18em] text-accent">
             The Experience
           </span>
-          <h2 className="mt-3 font-serif text-4xl font-medium leading-tight tracking-tight sm:text-5xl">
-            A Journey Beyond the Surface.
+          <h2 className="mt-3 font-inter text-[clamp(1.5rem,6.2vw,3.75rem)] font-bold leading-tight tracking-tight">
+            A Journey Beyond the{" "}
+            <span className="text-[#3F2A1C]">Surface.</span>
           </h2>
           <p className="mt-6 max-w-md leading-relaxed text-body">
             Our intimate, small-group expeditions are designed to offer a
@@ -46,8 +47,14 @@ export default function Experience() {
                 key={feature.title}
                 className="flex items-start gap-4 py-5 first:pt-0 last:pb-0"
               >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
-                  <feature.icon />
+                <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
+                  <Image
+                    src={feature.image}
+                    alt=""
+                    fill
+                    sizes="48px"
+                    className="object-contain p-1.5"
+                  />
                 </span>
                 <div>
                   <h3 className="text-lg font-semibold tracking-tight">
@@ -63,11 +70,9 @@ export default function Experience() {
 
           <a
             href="/about"
-            className="group mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-ink transition-colors hover:text-accent"
+            className="group mt-10 inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3.5 font-inter text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-accent-dark"
           >
-            <span className="border-b border-current pb-0.5">
-              More Our Experiences
-            </span>
+            More Our Experiences
             <ArrowRightIcon className="transition-transform duration-200 group-hover:translate-x-1" />
           </a>
         </div>
@@ -80,8 +85,8 @@ export default function Experience() {
             />
             <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] shadow-xl shadow-ink/10">
               <Image
-                src="/images/coral-reef.jpg"
-                alt="Sunrays streaming through the ocean over a vivid coral reef"
+                src="/images/journey-beyond-surface.jpg"
+                alt="A snorkeler diving down over a shallow reef in vivid turquoise water"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
                 className="object-cover"

@@ -517,3 +517,18 @@ export function CameraIcon({ className }: IconProps) {
     </svg>
   );
 }
+
+export function StarIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="m12 2.5 2.9 6.3 6.9.7-5.2 4.7 1.5 6.8-6.1-3.6-6.1 3.6 1.5-6.8-5.2-4.7 6.9-.7Z" />
+    </svg>
+  );
+}

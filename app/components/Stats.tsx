@@ -12,7 +12,7 @@ export default function Stats() {
         {STATS.map((stat) => (
           <div
             key={stat.label}
-            className="flex flex-col items-center gap-1.5 text-center lg:px-4"
+            className="flex flex-col items-center gap-1.5 rounded-2xl px-4 py-3 text-center transition-colors duration-300 hover:bg-white"
           >
             <span className="text-3xl font-[705] tracking-tight text-accent sm:text-4xl">
               {stat.value}
