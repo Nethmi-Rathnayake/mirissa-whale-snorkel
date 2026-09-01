@@ -31,7 +31,7 @@ export default function NewsletterForm() {
           <ArrowRightIcon />
         </button>
       </form>
-      <p role="status" className="mt-2 text-xs text-body">
+      <p role="status" className="mt-2 text-xs text-ivory/60">
         {submitted ? "Thanks — you're on the list." : " "}
       </p>
     </div>

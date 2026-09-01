@@ -4,7 +4,7 @@ import { ArrowRightIcon } from "./icons";
 export default function AboutJourney() {
   return (
     <section className="bg-ivory py-24 sm:py-28">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-10">
+      <div className="grid gap-12 px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-16">
         <div>
           <div className="flex items-center gap-3">
             <span className="h-px w-8 bg-border" aria-hidden="true" />

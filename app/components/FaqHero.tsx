@@ -19,7 +19,7 @@ export default function FaqHero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto -mt-28 w-full max-w-7xl px-6 pb-10 lg:-mt-32 lg:px-10">
+      <div className="relative z-10 -mt-28 w-full px-6 pb-10 lg:-mt-32 lg:px-16">
         <span className="inline-flex items-center gap-2 rounded-full border border-ink/15 bg-white/80 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-ink backdrop-blur-sm">
           <HelpCircleIcon />
           Support Center

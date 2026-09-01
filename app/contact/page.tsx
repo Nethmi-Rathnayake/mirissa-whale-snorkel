@@ -24,7 +24,7 @@ export default function ContactPage() {
       <Header />
       <main className="flex-1">
         <section className="bg-ivory pb-6 pt-16 sm:pt-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="px-6 lg:px-16">
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
               Let&rsquo;s Connect
             </h1>
@@ -37,7 +37,7 @@ export default function ContactPage() {
         </section>
 
         <section className="bg-ivory pb-24 pt-10 sm:pb-28">
-          <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1.4fr_1fr] lg:px-10">
+          <div className="grid gap-10 px-6 lg:grid-cols-[1.4fr_1fr] lg:px-16">
             <ContactForm />
 
             <div className="flex flex-col gap-6">

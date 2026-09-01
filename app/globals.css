@@ -19,9 +19,31 @@
   --color-accent: var(--color-accent);
   --color-accent-dark: var(--color-accent-dark);
   --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-playfair);
+  --font-inter: var(--font-inter);
 }
 
 body {
   background: var(--color-ivory);
   color: var(--color-ink);
+}
+
+@keyframes hero-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes cursor-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
 }

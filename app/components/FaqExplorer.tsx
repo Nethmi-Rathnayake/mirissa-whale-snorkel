@@ -46,7 +46,7 @@ export default function FaqExplorer({
   }
 
   return (
-    <div className="mx-auto grid max-w-7xl gap-10 px-6 pb-24 pt-16 sm:pb-28 lg:grid-cols-[280px_1fr] lg:gap-12 lg:px-10">
+    <div className="grid gap-10 px-6 pb-24 pt-16 sm:pb-28 lg:grid-cols-[280px_1fr] lg:gap-12 lg:px-16">
       <aside className="lg:sticky lg:top-28 lg:self-start">
         <div className="rounded-3xl border border-border/80 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-bold tracking-tight">Categories</h2>

@@ -19,7 +19,7 @@ const FEATURES = [
 export default function AboutSustainability() {
   return (
     <section className="bg-cream/60 py-24 sm:py-28">
-      <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-10">
+      <div className="grid gap-12 px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-16">
         <div>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
             Protecting what we love.

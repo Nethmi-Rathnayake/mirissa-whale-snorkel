@@ -4,6 +4,7 @@ import Stats from "./components/Stats";
 import Packages from "./components/Packages";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
+import Reveal from "./components/Reveal";
 
 export default function Home() {
   return (
@@ -11,11 +12,17 @@ export default function Home() {
       <Header />
       <main className="flex-1">
         <Hero />
-        <Stats />
+        <Reveal>
+          <Stats />
+        </Reveal>
         <Packages />
-        <Experience />
+        <Reveal>
+          <Experience />
+        </Reveal>
       </main>
-      <Footer />
+      <Reveal>
+        <Footer />
+      </Reveal>
     </>
   );
 }

@@ -25,7 +25,7 @@ const CREW = [
 export default function AboutCrew() {
   return (
     <section className="bg-ivory py-24 sm:py-28">
-      <div className="mx-auto max-w-7xl px-6 text-center lg:px-10">
+      <div className="px-6 text-center lg:px-16">
         <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
           The Crew
         </span>
@@ -34,7 +34,7 @@ export default function AboutCrew() {
         </h2>
       </div>
 
-      <div className="mx-auto mt-14 grid max-w-7xl gap-4 px-6 lg:grid-cols-[1.1fr_1fr] lg:px-10">
+      <div className="mt-14 grid gap-4 px-6 lg:grid-cols-[1.1fr_1fr] lg:px-16">
         <div className="relative min-h-[420px] overflow-hidden rounded-3xl lg:min-h-0">
           <Image
             src="/images/whale-tails-aerial.jpg"

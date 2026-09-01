@@ -25,7 +25,7 @@ export default function AboutHero() {
       />
 
       <div className="relative z-10 flex h-full items-end">
-        <div className="mx-auto w-full max-w-7xl px-6 pb-12 lg:px-10">
+        <div className="w-full px-6 pb-12 lg:px-16">
           <h1 className="max-w-2xl text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
             Born from a reverence for the deep.
           </h1>

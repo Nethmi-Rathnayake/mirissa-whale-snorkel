@@ -28,7 +28,7 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
           aria-hidden="true"
         />
 
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-10 lg:px-10">
+        <div className="relative z-10 w-full px-6 pb-10 lg:px-16">
           <nav
             aria-label="Breadcrumb"
             className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-white/75"
@@ -55,7 +55,7 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
       </section>
 
       <section className="bg-ivory py-16 sm:py-20">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-3 lg:gap-10 lg:px-10">
+        <div className="grid gap-12 px-6 lg:grid-cols-3 lg:gap-10 lg:px-16">
           <div className="lg:col-span-2">
             <p className="leading-relaxed text-body">{pkg.description}</p>
 

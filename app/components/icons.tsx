@@ -437,6 +437,67 @@ export function CardIcon({ className }: IconProps) {
   );
 }
 
+export function WhaleTailIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 21c-1.3-3.6-1.3-7.2 0-11 1.3 3.8 1.3 7.4 0 11Z" />
+      <path d="M12 10.4C9.6 8.3 8 5.7 8 3c3 .9 5.1 2.9 6 5.6" />
+      <path d="M12 10.4c2.4-2.1 4-4.7 4-7.4-3 .9-5.1 2.9-6 5.6" />
+    </svg>
+  );
+}
+
+export function MedalIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="15" r="5" />
+      <path d="m9.5 11-2.7-7h2.5L12 9.3 14.7 4h2.5l-2.7 7" />
+    </svg>
+  );
+}
+
+export function WaveIcon({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M2 9c1.5-1.7 3-1.7 4.5 0s3 1.7 4.5 0 3-1.7 4.5 0 3 1.7 4.5 0" />
+      <path d="M2 15c1.5-1.7 3-1.7 4.5 0s3 1.7 4.5 0 3-1.7 4.5 0 3 1.7 4.5 0" />
+    </svg>
+  );
+}
+
 export function CameraIcon({ className }: IconProps) {
   return (
     <svg

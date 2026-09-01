@@ -1,63 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CloseIcon, MenuIcon, UserIcon } from "./icons";
 
 const NAV_LINKS = [
-  { label: "Home", href: "/" },
-  { label: "Experience", href: "/#experience" },
-  { label: "Packages", href: "/#packages" },
-  { label: "Gallery", href: "/#gallery" },
-  { label: "About", href: "/about" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/", hash: "" },
+  { label: "Experience", href: "/#experience", hash: "#experience" },
+  { label: "Packages", href: "/#packages", hash: "#packages" },
+  { label: "Gallery", href: "/#gallery", hash: "#gallery" },
+  { label: "About", href: "/about", hash: "" },
+  { label: "FAQ", href: "/faq", hash: "" },
+  { label: "Contact", href: "/contact", hash: "" },
 ];
 
-function isLinkActive(pathname: string, href: string) {
-  const path = href.split("#")[0] || "/";
-  return path === "/" ? pathname === "/" : pathname === path;
+function getActiveLabel(pathname: string, hash: string) {
+  if (pathname.startsWith("/packages")) return "Packages";
+
+  const routeMatch = NAV_LINKS.find(
+    (link) => link.href !== "/" && !link.href.includes("#") && pathname === link.href
+  );
+  if (routeMatch) return routeMatch.label;
+
+  if (pathname !== "/") return null;
+  return NAV_LINKS.find((link) => link.hash === hash)?.label ?? "Home";
 }
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const [hash, setHash] = useState("");
+
+  useEffect(() => {
+    const syncHash = () => setHash(window.location.hash);
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, [pathname]);
+
+  const activeLabel = getActiveLabel(pathname, hash);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-ivory/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-cream/90 backdrop-blur-md">
+      <div className="flex items-center justify-between px-6 py-4 lg:px-16">
         <Link href="/" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-ink/15">
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M2 16c2 2 4 2 6 0s4-2 6 0 4 2 6 0 4-2 6 0" />
-              <path d="M4 20c1.5 1 3 1 4.5 0S12 19 14 20s3 1 4.5 0" />
-              <path d="M15 5c1.5 0 4 1.5 4 5-2 .5-4.5-.5-5.5-2.5C12.5 5.5 13.5 5 15 5Z" />
-            </svg>
+          <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full">
+            <Image
+              src="/images/logo.png"
+              alt="Mirissa Whale Snorkel logo"
+              fill
+              sizes="36px"
+              className="object-cover"
+            />
           </span>
-          <span className="text-[1.05rem] font-semibold leading-tight tracking-tight">
-            Mirissa Whale
-            <br className="hidden sm:block" /> Snorkel
+          <span className="whitespace-nowrap text-[1.05rem] font-semibold leading-tight tracking-tight">
+            Mirissa Whale Snorkel
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-9 text-sm font-medium text-ink/80 lg:flex">
+        <nav className="hidden items-center gap-5 text-sm font-[705] text-ink/80 lg:flex xl:gap-9">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.label}
               href={link.href}
+              onClick={() => setHash(link.hash)}
               className={`transition-colors hover:text-ink ${
-                isLinkActive(pathname, link.href)
+                link.label === activeLabel
                   ? "border-b-2 border-ink pb-1 text-ink"
                   : ""
               }`}
@@ -95,14 +105,19 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="border-t border-border/70 bg-ivory px-6 pb-6 pt-2 lg:hidden">
-          <nav className="flex flex-col gap-1 text-sm font-medium text-ink/80">
+        <div className="border-t border-border/70 bg-cream px-6 pb-6 pt-2 lg:hidden">
+          <nav className="flex flex-col gap-1 text-sm font-[705] text-ink/80">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-2 py-2.5 transition-colors hover:bg-cream hover:text-ink"
+                onClick={() => {
+                  setHash(link.hash);
+                  setOpen(false);
+                }}
+                className={`rounded-lg px-2 py-2.5 transition-colors hover:bg-cream hover:text-ink ${
+                  link.label === activeLabel ? "bg-cream text-ink" : ""
+                }`}
               >
                 {link.label}
               </Link>
