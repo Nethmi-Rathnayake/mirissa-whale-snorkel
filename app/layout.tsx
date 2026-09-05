@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import OceanScrollEffect from "./components/OceanScrollEffect";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -33,7 +32,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${dmSans.variable} ${playfairDisplay.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory font-sans text-ink">
-        <OceanScrollEffect />
         {children}
       </body>
     </html>

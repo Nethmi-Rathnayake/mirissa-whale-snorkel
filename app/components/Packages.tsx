@@ -61,7 +61,7 @@ export default function Packages() {
                       <Link
                         key={topic.anchor}
                         href={`/packages/${pkg.slug}#${topic.anchor}`}
-                        className="group/link flex items-center justify-between gap-3 rounded-xl px-2.5 py-2.5 text-sm text-ink/85 transition-colors hover:bg-cream hover:text-ink"
+                        className="group/link flex min-h-11 items-center justify-between gap-3 rounded-xl px-2.5 py-2.5 text-sm text-ink/85 transition-colors hover:bg-cream hover:text-ink"
                       >
                         <span>{topic.label}</span>
                         <ChevronRightIcon className="shrink-0 text-body transition-all duration-200 group-hover/link:translate-x-0.5 group-hover/link:text-accent" />

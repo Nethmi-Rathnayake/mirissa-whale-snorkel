@@ -192,8 +192,8 @@ export const packages: TourPackage[] = [
     popular: true,
     cardImage: "/images/blue-whale-spouting.png",
     cardImageAlt: "A blue whale surfacing and spouting near the boat",
-    heroImage: "/images/whale-tails-aerial.jpg",
-    heroImageAlt: "Aerial view of two whales surfacing side by side",
+    heroImage: "/images/turtle-snorkeler-boy.png",
+    heroImageAlt: "A child snorkeling over a shallow reef",
     price: {
       kind: "flat",
       price: 45,

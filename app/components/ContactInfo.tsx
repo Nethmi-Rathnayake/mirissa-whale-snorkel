@@ -33,14 +33,14 @@ export default function ContactInfo() {
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10">
               <row.icon />
             </span>
-            <div>
+            <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-ivory/60">
                 {row.label}
               </p>
               {row.href ? (
                 <a
                   href={row.href}
-                  className="mt-1 block text-sm leading-relaxed text-ivory/90 transition-colors hover:text-white"
+                  className="mt-1 block break-words text-sm leading-relaxed text-ivory/90 transition-colors hover:text-white"
                 >
                   {row.lines.map((line) => (
                     <span key={line} className="block">
@@ -49,7 +49,7 @@ export default function ContactInfo() {
                   ))}
                 </a>
               ) : (
-                <p className="mt-1 text-sm leading-relaxed text-ivory/90">
+                <p className="mt-1 break-words text-sm leading-relaxed text-ivory/90">
                   {row.lines.map((line) => (
                     <span key={line} className="block">
                       {line}

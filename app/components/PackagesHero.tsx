@@ -51,12 +51,12 @@ export default function PackagesHero() {
           {HERO_STATS.map((stat) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center gap-1 px-1 text-center sm:px-2 lg:px-6"
+              className="flex min-w-0 flex-col items-center gap-1 px-1 text-center sm:px-2 lg:px-6"
             >
               <span className="text-xl font-[705] tracking-tight text-accent sm:text-2xl">
                 {stat.value}
               </span>
-              <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-body">
+              <span className="break-words text-[10px] font-medium uppercase tracking-[0.08em] text-body sm:text-[11px] sm:tracking-[0.12em]">
                 {stat.label}
               </span>
             </div>

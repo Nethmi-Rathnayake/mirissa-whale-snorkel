@@ -75,7 +75,7 @@ export default function Header() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="flex h-10 w-10 items-center justify-center rounded-full text-ink lg:hidden"
+          className="-mr-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-ink lg:hidden"
         >
           {open ? <CloseIcon /> : <MenuIcon />}
         </button>
@@ -89,7 +89,7 @@ export default function Header() {
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`rounded-lg px-2 py-2.5 transition-colors hover:bg-cream hover:text-ink ${
+                className={`rounded-lg px-2 py-3 transition-colors hover:bg-cream hover:text-ink ${
                   link.label === activeLabel ? "bg-cream text-ink" : ""
                 }`}
               >
@@ -100,7 +100,7 @@ export default function Header() {
           <Link
             href="/packages"
             onClick={() => setOpen(false)}
-            className="mt-4 block rounded-full bg-[#3F2A1C] px-6 py-2.5 text-center text-sm font-medium text-ivory transition-colors hover:bg-[#3F2A1C]/85"
+            className="mt-4 block rounded-full bg-[#3F2A1C] px-6 py-3 text-center text-sm font-medium text-ivory transition-colors hover:bg-[#3F2A1C]/85"
           >
             Book Now
           </Link>

@@ -123,7 +123,7 @@ export default function Footer() {
                 const content = (
                   <span className="flex items-start gap-3">
                     <row.icon className="mt-0.5 h-4 w-4 shrink-0 text-ivory/50" />
-                    <span className="leading-relaxed text-ivory/85">
+                    <span className="min-w-0 break-words leading-relaxed text-ivory/85">
                       {row.text}
                     </span>
                   </span>

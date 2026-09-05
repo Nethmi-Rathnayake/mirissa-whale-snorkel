@@ -232,8 +232,8 @@ const GALLERY_IMAGES = [
     category: "padi-bubblemaker-seal-team",
   },
   {
-    src: "/images/fun-diving-friends-wetsuits-beach.png",
-    alt: "Two divers in wetsuits smiling on the beach before a dive",
+    src: "/images/about-hero-cave-divers.png",
+    alt: "Divers exploring an underwater rock formation",
     span: "col-span-2",
     category: "refresher-dive",
   },
