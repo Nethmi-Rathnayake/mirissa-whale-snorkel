@@ -21,8 +21,8 @@ export default function AboutSustainability() {
     <section className="bg-cream/60 py-24 sm:py-28">
       <div className="grid gap-12 px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-16">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Protecting what we love.
+          <h2 className="font-inter text-[clamp(1.5rem,6.2vw,3.75rem)] font-bold tracking-tight">
+            Protecting <span className="text-[#E0BF00]">What We Love.</span>
           </h2>
           <p className="mt-6 leading-relaxed text-body">
             A percentage of every booking directly funds local marine

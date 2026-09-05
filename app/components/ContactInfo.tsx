@@ -9,14 +9,14 @@ const ROWS = [
   {
     icon: PhoneIcon,
     label: "Phone",
-    lines: ["+94 77 123 4567", "Mon–Sun, 7:00 AM – 6:00 PM (LKT)"],
-    href: "tel:+94771234567",
+    lines: ["(076) 487 5498", "Mon–Sun, 7:00 AM – 6:00 PM (LKT)"],
+    href: "tel:0764875498",
   },
   {
     icon: MailIcon,
     label: "Email",
-    lines: ["hello@mirissawhalesnorkel.com"],
-    href: "mailto:hello@mirissawhalesnorkel.com",
+    lines: ["mirissawhalesnorkal@gmail.com"],
+    href: "mailto:mirissawhalesnorkal@gmail.com",
   },
 ];
 

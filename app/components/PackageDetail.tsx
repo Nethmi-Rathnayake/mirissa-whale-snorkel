@@ -38,7 +38,7 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
             </Link>
             <span aria-hidden="true">/</span>
             <Link
-              href="/#packages"
+              href="/packages"
               className="transition-colors hover:text-white"
             >
               Packages
@@ -63,8 +63,30 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
               <Accordion items={pkg.sections} />
             </div>
 
+            {pkg.videos && pkg.videos.length > 0 && (
+              <div className="mt-12">
+                <h2 className="text-lg font-semibold tracking-tight">
+                  Video Highlights
+                </h2>
+                <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                  {pkg.videos.map((video) => (
+                    <video
+                      key={video.src}
+                      controls
+                      preload="metadata"
+                      playsInline
+                      aria-label={video.label}
+                      className="aspect-video w-full rounded-2xl border border-border/80 bg-ink"
+                    >
+                      <source src={video.src} type="video/mp4" />
+                    </video>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <Link
-              href="/#packages"
+              href="/packages"
               className="mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors hover:text-accent"
             >
               <ArrowRightIcon className="rotate-180" />
@@ -73,7 +95,7 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="sticky top-28 rounded-3xl border border-border/80 bg-white p-8 shadow-sm">
+            <div className="rounded-3xl border border-border/80 bg-white p-8 shadow-sm lg:sticky lg:top-28">
               <div id="price" className="scroll-mt-28 text-center">
                 {pkg.price.kind === "flat" ? (
                   <>
@@ -148,7 +170,7 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
               </div>
 
               <a
-                href={`mailto:bookings@mirissawhalesnorkel.com?subject=${encodeURIComponent(
+                href={`mailto:mirissawhalesnorkal@gmail.com?subject=${encodeURIComponent(
                   `Booking Enquiry - ${pkg.name}`
                 )}`}
                 className={`mt-8 block rounded-full px-6 py-3.5 text-center text-sm font-semibold transition-colors ${

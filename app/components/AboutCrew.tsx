@@ -9,8 +9,8 @@ const CREW = [
     role: "Lead Marine Biologist",
   },
   {
-    image: "/images/diver-reef.jpg",
-    alt: "A snorkel guide exploring a reef alongside a school of fish",
+    image: "/images/dsd-fish-school-blue-water.png",
+    alt: "A school of reef fish drifting over open blue water",
     name: "Malik Fernando",
     role: "Lead Snorkel Guide",
   },
@@ -26,11 +26,12 @@ export default function AboutCrew() {
   return (
     <section className="bg-ivory py-24 sm:py-28">
       <div className="px-6 text-center lg:px-16">
-        <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+        <span className="text-[17px] font-bold uppercase tracking-[0.18em] text-accent">
           The Crew
         </span>
-        <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-          Meet the experts guiding your journey into the blue.
+        <h2 className="mt-3 font-inter text-[clamp(1.5rem,6.2vw,3.75rem)] font-bold tracking-tight">
+          Meet The Experts Guiding Your Journey{" "}
+          <span className="text-[#1C86C9]">Into The Blue.</span>
         </h2>
       </div>
 

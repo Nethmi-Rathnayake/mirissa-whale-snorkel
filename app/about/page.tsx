@@ -18,8 +18,12 @@ export default function AboutPage() {
       <Header />
       <main className="flex-1">
         <AboutHero />
-        <AboutJourney />
-        <AboutCrew />
+        <div className="-mt-12 lg:-mt-16">
+          <AboutJourney />
+        </div>
+        <div className="-mt-[110px]">
+          <AboutCrew />
+        </div>
         <AboutSustainability />
       </main>
       <Footer />

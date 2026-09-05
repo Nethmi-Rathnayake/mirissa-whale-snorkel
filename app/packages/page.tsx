@@ -16,7 +16,9 @@ export default function PackagesPage() {
       <Header />
       <main className="flex-1 bg-ivory">
         <PackagesHero />
-        <Packages />
+        <div className="-mt-12 lg:-mt-16">
+          <Packages />
+        </div>
       </main>
       <Footer />
     </>

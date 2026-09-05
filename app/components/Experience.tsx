@@ -96,8 +96,8 @@ export default function Experience() {
           <div className="absolute bottom-0 left-0 w-40 overflow-hidden rounded-2xl border-4 border-ivory shadow-xl sm:w-56">
             <div className="relative aspect-[4/5] w-full">
               <Image
-                src="/images/turtle.jpg"
-                alt="A sea turtle gliding through clear Mirissa waters"
+                src="/images/fun-diving-diver-anemone-clownfish-selfie.png"
+                alt="A diver posing beside a fellow diver, framed by coral, anemone and clownfish"
                 fill
                 sizes="224px"
                 className="object-cover"

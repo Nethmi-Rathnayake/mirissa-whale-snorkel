@@ -8,12 +8,13 @@ export default function AboutJourney() {
         <div>
           <div className="flex items-center gap-3">
             <span className="h-px w-8 bg-border" aria-hidden="true" />
-            <span className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+            <span className="text-[17px] font-bold uppercase tracking-[0.18em] text-accent">
               Our Journey
             </span>
           </div>
-          <h2 className="mt-4 text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
-            Pioneering ethical encounters since 2012.
+          <h2 className="mt-4 font-inter text-[clamp(1.5rem,6.2vw,3.75rem)] font-bold leading-tight tracking-tight">
+            Pioneering Ethical Encounters{" "}
+            <span className="text-[#E0BF00]">Since 2012.</span>
           </h2>
           <p className="mt-6 leading-relaxed text-body">
             What began as a small research initiative mapping the migratory
@@ -39,8 +40,8 @@ export default function AboutJourney() {
 
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
           <Image
-            src="/images/whale-breach.jpg"
-            alt="A humpback whale breaching the surface near Mirissa"
+            src="/images/blue-whale-underwater-side.png"
+            alt="A blue whale gliding through open water"
             fill
             sizes="(min-width: 1024px) 45vw, 90vw"
             className="object-cover"

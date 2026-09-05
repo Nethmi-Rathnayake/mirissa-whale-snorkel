@@ -12,7 +12,7 @@ export default function Packages() {
           <span className="text-[17px] font-bold uppercase tracking-[0.18em] text-accent">
             Whale & Dolphin Tours
           </span>
-          <h2 className="mt-3 whitespace-nowrap font-inter text-[clamp(1.5rem,6.2vw,3.75rem)] font-bold tracking-tight">
+          <h2 className="mt-3 font-inter text-[clamp(1.5rem,6.2vw,3.75rem)] font-bold tracking-tight">
             Choose Your Adventure
           </h2>
         </div>

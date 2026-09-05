@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import ContactHero from "../components/ContactHero";
 import ContactForm from "../components/ContactForm";
 import ContactInfo from "../components/ContactInfo";
 import { CameraIcon, PlayIcon, ShareIcon } from "../components/icons";
@@ -23,21 +24,10 @@ export default function ContactPage() {
     <>
       <Header />
       <main className="flex-1">
-        <section className="bg-ivory pb-6 pt-16 sm:pt-20">
-          <div className="px-6 lg:px-16">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-              Let&rsquo;s Connect
-            </h1>
-            <p className="mt-5 max-w-xl leading-relaxed text-body">
-              Whether you have a question about our snorkeling packages, need
-              assistance with a booking, or just want to say hello, our team
-              is ready to help you plan your perfect ocean adventure.
-            </p>
-          </div>
-        </section>
+        <ContactHero />
 
-        <section className="bg-ivory pb-24 pt-10 sm:pb-28">
-          <div className="grid gap-10 px-6 lg:grid-cols-[1.4fr_1fr] lg:px-16">
+        <section className="-mt-12 bg-ivory pb-24 pt-10 sm:pb-28 lg:-mt-16">
+          <div className="grid items-start gap-10 px-6 lg:grid-cols-[1.4fr_1fr] lg:px-16">
             <ContactForm />
 
             <div className="flex flex-col gap-6">
@@ -45,8 +35,8 @@ export default function ContactPage() {
 
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
                 <Image
-                  src="/images/whale-tails-aerial.jpg"
-                  alt="Aerial view of two whales surfacing side by side"
+                  src="/images/contact-diver-camera.png"
+                  alt="A diver photographing marine life beside a coral reef"
                   fill
                   sizes="(min-width: 1024px) 30vw, 90vw"
                   className="object-cover"

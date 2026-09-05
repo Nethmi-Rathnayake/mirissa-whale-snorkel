@@ -1,45 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CloseIcon, MenuIcon, UserIcon } from "./icons";
+import { CloseIcon, MenuIcon } from "./icons";
 
 const NAV_LINKS = [
-  { label: "Home", href: "/", hash: "" },
-  { label: "Packages", href: "/packages", hash: "" },
-  { label: "Gallery", href: "/#gallery", hash: "#gallery" },
-  { label: "About", href: "/about", hash: "" },
-  { label: "FAQ", href: "/faq", hash: "" },
-  { label: "Contact", href: "/contact", hash: "" },
+  { label: "Home", href: "/" },
+  { label: "Packages", href: "/packages" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "About", href: "/about" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
-function getActiveLabel(pathname: string, hash: string) {
+function getActiveLabel(pathname: string) {
   if (pathname.startsWith("/packages")) return "Packages";
 
-  const routeMatch = NAV_LINKS.find(
-    (link) => link.href !== "/" && !link.href.includes("#") && pathname === link.href
-  );
-  if (routeMatch) return routeMatch.label;
-
-  if (pathname !== "/") return null;
-  return NAV_LINKS.find((link) => link.hash === hash)?.label ?? "Home";
+  const routeMatch = NAV_LINKS.find((link) => pathname === link.href);
+  return routeMatch?.label ?? null;
 }
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const [hash, setHash] = useState("");
-
-  useEffect(() => {
-    const syncHash = () => setHash(window.location.hash);
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, [pathname]);
-
-  const activeLabel = getActiveLabel(pathname, hash);
+  const activeLabel = getActiveLabel(pathname);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-cream/90 backdrop-blur-md">
@@ -54,22 +40,21 @@ export default function Header() {
               className="object-cover"
             />
           </span>
-          <span className="whitespace-nowrap text-[1.05rem] font-semibold leading-tight tracking-tight">
+          <span className="whitespace-nowrap text-sm font-semibold leading-tight tracking-tight sm:text-base lg:text-[1.05rem]">
             Mirissa Whale Snorkel
           </span>
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex xl:gap-12">
-          <nav className="flex items-center gap-5 text-sm font-[705] text-ink/80 xl:gap-9">
+          <nav className="flex items-center gap-5 text-sm font-bold text-ink/80 xl:gap-9">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                onClick={() => setHash(link.hash)}
                 className={`transition-colors hover:text-ink ${
                   link.label === activeLabel
-                    ? "border-b-2 border-ink pb-1 text-ink"
-                    : ""
+                    ? "border-b-2 border-accent pb-1 text-ink"
+                    : "border-b-2 border-transparent pb-1"
                 }`}
               >
                 {link.label}
@@ -77,21 +62,12 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4">
-            <Link
-              href="/#packages"
-              className="rounded-full bg-ink px-6 py-2.5 text-sm font-medium text-ivory transition-colors hover:bg-ink/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
-            >
-              Book Now
-            </Link>
-            <button
-              type="button"
-              aria-label="Account"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-cream text-ink transition-colors hover:bg-border"
-            >
-              <UserIcon />
-            </button>
-          </div>
+          <Link
+            href="/packages"
+            className="rounded-full bg-[#3F2A1C] px-6 py-2.5 text-sm font-medium text-ivory transition-colors hover:bg-[#3F2A1C]/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3F2A1C]"
+          >
+            Book Now
+          </Link>
         </div>
 
         <button
@@ -107,15 +83,12 @@ export default function Header() {
 
       {open && (
         <div className="border-t border-border/70 bg-cream px-6 pb-6 pt-2 lg:hidden">
-          <nav className="flex flex-col gap-1 text-sm font-[705] text-ink/80">
+          <nav className="flex flex-col gap-1 text-sm font-bold text-ink/80">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                onClick={() => {
-                  setHash(link.hash);
-                  setOpen(false);
-                }}
+                onClick={() => setOpen(false)}
                 className={`rounded-lg px-2 py-2.5 transition-colors hover:bg-cream hover:text-ink ${
                   link.label === activeLabel ? "bg-cream text-ink" : ""
                 }`}
@@ -124,22 +97,13 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          <div className="mt-4 flex items-center gap-3">
-            <Link
-              href="/#packages"
-              onClick={() => setOpen(false)}
-              className="flex-1 rounded-full bg-ink px-6 py-2.5 text-center text-sm font-medium text-ivory transition-colors hover:bg-ink/85"
-            >
-              Book Now
-            </Link>
-            <button
-              type="button"
-              aria-label="Account"
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-cream text-ink"
-            >
-              <UserIcon />
-            </button>
-          </div>
+          <Link
+            href="/packages"
+            onClick={() => setOpen(false)}
+            className="mt-4 block rounded-full bg-[#3F2A1C] px-6 py-2.5 text-center text-sm font-medium text-ivory transition-colors hover:bg-[#3F2A1C]/85"
+          >
+            Book Now
+          </Link>
         </div>
       )}
     </header>

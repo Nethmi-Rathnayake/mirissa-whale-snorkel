@@ -23,7 +23,7 @@ No test runner is configured.
 - React 19.2.8 / React DOM 19.2.8
 - TypeScript, strict mode, path alias `@/*` → repo root
 - Tailwind CSS v4 (CSS-first config via `@import "tailwindcss"` and `@theme inline` in `app/globals.css`, no `tailwind.config.*` file)
-- DM Sans loaded via `next/font/google` in `app/layout.tsx` and exposed as `--font-dm-sans` / the `font-sans` Tailwind utility (not the `create-next-app` default Geist)
+- Three fonts loaded via `next/font/google` in `app/layout.tsx` (not the `create-next-app` default Geist): DM Sans → `--font-dm-sans` / `font-sans` (body), Playfair Display → `--font-playfair` / `font-serif` (display/heading), Inter → `--font-inter` (used directly where a distinct weight/tracking is needed, e.g. eyebrow labels)
 
 ## Non-standard Next.js version
 
@@ -42,27 +42,32 @@ The `<!-- BEGIN:nextjs-agent-rules -->…<!-- END:nextjs-agent-rules -->` block 
 ## Architecture
 
 **Routes** (App Router, all pages are server components that compose section components):
-- `app/page.tsx` — home page, composed of `Header`, `Hero`, `Stats`, `Packages`, `Experience`, `Footer`.
+- `app/page.tsx` — home page: `Header`, `Hero`, `Stats`, `Packages`, `Testimonials`, `Experience`, `TrustBadges`, `Footer`. All sections except `Header`/`Hero`/`Packages` are wrapped in `Reveal` for scroll-in animation.
+- `app/packages/page.tsx` — packages index/listing page. Renders `Header` + `PackagesHero` + `Packages` + `Footer` (same `Packages` grid component used on the home page).
 - `app/packages/[slug]/page.tsx` — one page per tour package, statically generated via `generateStaticParams`. Renders `Header` + `PackageDetail` + `Footer`.
 - `app/about/page.tsx` — renders `Header` + `AboutHero`, `AboutJourney`, `AboutCrew`, `AboutSustainability` + `Footer`.
-- `app/contact/page.tsx` — renders `Header` + `ContactForm` + `ContactInfo` (plus a static image and social links) + `Footer`.
+- `app/contact/page.tsx` — renders `Header` + `ContactHero` + `ContactForm` + `ContactInfo` (plus a static image and social links) + `Footer`.
 - `app/faq/page.tsx` — renders `Header` + `FaqHero` + `FaqExplorer` (fed from `app/lib/faq.ts`) + `Footer`.
+- `app/gallery/page.tsx` — renders `Header` + `GalleryHero` + `GalleryGrid` + `Footer`.
 
 Each of these route files sets its own `export const metadata: Metadata` (title/description) rather than relying on a shared layout default — follow that pattern for any new route.
 
 **Package data** lives entirely in `app/lib/packages.ts`, not in any CMS or database:
-- `packages: TourPackage[]` is the single source of truth for tour content (pricing, images, features, species, logistics). `Packages` (grid on the home page) and `PackageDetail` (the `[slug]` page) both render from this array — add a new tour by appending to it.
+- `packages: TourPackage[]` is the single source of truth for tour content (pricing, images, features, species, logistics). `Packages` (the grid rendered on both the home page and `/packages`) and `PackageDetail` (the `[slug]` page) both render from this array — add a new tour by appending to it.
 - `getPackageBySlug(slug)` powers the dynamic route's lookup and 404 (`notFound()`) handling.
-- `TOPIC_ANCHORS` / `PACKAGE_TOPICS` define the set of on-page section ids (price, included, species, etc.). The home page package cards deep-link into these anchors on the detail page (e.g. `/packages/${slug}#price`); `PackageDetail` renders a matching `id={...}` + `scroll-mt-28` on each section. Adding a new topic requires updating both this list and the corresponding section in `PackageDetail.tsx`.
+- Each `TourPackage` carries its own `topics: { label, anchor }[]` (there's no shared/global topic list — anchors are per-package and vary in name/count between tours). These deep-link into `PackageDetail` sections rendered from the same package's `sections`/sidebar data (e.g. `/packages/${slug}#price`); anchored elements use `scroll-mt-28` so the sticky header doesn't cover them. Adding a topic to a package means adding both the `topics` entry and the corresponding `id`-bearing section for that package.
+- `TourPackage.videos?: { src, label }[]` is optional per-package; when present, `PackageDetail` renders a "Video Highlights" grid of `<video controls>` tiles below the accordion. Not every package has videos — check before assuming the section exists.
 
 **FAQ data** lives similarly in `app/lib/faq.ts`: `faqCategories: FaqCategory[]` groups `FaqQuestion` entries under a category id/title; `FaqExplorer` (client component) renders the interactive filtering/accordion UI from this array, so add a new FAQ by editing the array, not the component.
 
-**Components** (`app/components/`) are mostly presentational; `"use client"` is used specifically for interactivity: `Header` (mobile menu + active-link state), `NewsletterForm` (submitted state), `Hero`, `Accordion`, `FaqExplorer`, `ContactForm`, and `Reveal` (a generic `IntersectionObserver`-based scroll-reveal wrapper used to fade/slide content into view — wrap new on-scroll animated sections in it rather than writing a new observer). `icons.tsx` holds all inline SVG icons as small components rather than an icon library dependency.
+**Components** (`app/components/`) are mostly presentational; `"use client"` is used specifically for interactivity: `Header` (mobile menu + active-link state), `NewsletterForm` (submitted state), `Hero`, `Accordion`, `FaqExplorer`, `ContactForm`, `Testimonials`, `GalleryHero` and `GalleryGrid` (lightbox/filter state), and `Reveal` (a generic `IntersectionObserver`-based scroll-reveal wrapper used to fade/slide content into view — wrap new on-scroll animated sections in it rather than writing a new observer). `icons.tsx` holds all inline SVG icons as small components rather than an icon library dependency.
 
 **Styling** uses Tailwind utility classes exclusively (no CSS modules/styled-components). The color palette is defined as CSS custom properties in `app/globals.css` (`--color-ivory`, `--color-cream`, `--color-border`, `--color-ink`, `--color-body`, `--color-accent`, `--color-accent-dark`) and re-exposed through Tailwind v4's `@theme inline` block, so they're used as ordinary utilities (`bg-ivory`, `text-ink`, `border-accent/25`, etc.) rather than arbitrary values.
 
-**Images** referenced by components (`/images/*.jpg`) live in `public/images/` and are served statically; all are used with `next/image`'s `fill` + `sizes` pattern, not fixed `width`/`height`.
+**Images** referenced by components (`/images/*`, a mix of `.png` and legacy `.jpg`) live in `public/images/` and are served statically; all are used with `next/image`'s `fill` + `sizes` pattern, not fixed `width`/`height`. **Videos** (`/videos/*.mp4`) live in `public/videos/` and are self-hosted (no external embeds) — referenced from `TourPackage.videos`, `GalleryGrid`'s video tiles, and `GalleryHero`'s background.
 
-## Repository note
+**`GalleryGrid`** merges two separate arrays — `GALLERY_IMAGES` (`next/image`) and `GALLERY_VIDEOS` (autoplaying, muted, looping `<video>`, no controls) — into one `GALLERY_ITEMS` list via `interleaveMedia()`, which spaces videos evenly through the images rather than grouping all of one type together. Every item carries a `category` matching a package `slug` (or `"all"`), and the filter buttons are generated from `packages` — add media to the gallery by appending to the relevant array with a matching `category`, not by editing the filter/render logic. **`GalleryHero`** has two independent media systems on the same page: a single full-bleed autoplaying background video (`public/videos/gallery-hero-background.mp4`, unrelated to any package) behind the headline, and a separate per-package preview card below it (`HERO_OPTIONS`, built from `packages` plus a synthetic `"highlights"` entry) whose small thumbnail/CTA switches on click; `HERO_IMAGE_OVERRIDES` lets a package show a different still image in that preview card than its own `heroImage`.
 
-This working tree has an untracked nested directory, `mirissa-whale-snorkel/`, which is itself a separate git repository containing what looks like an earlier copy of this same project. It's excluded from version control by being untracked, but be aware it exists so file searches/greps aren't confused by duplicate hits — it is not part of the active app.
+## Brand and product direction
+
+`PRODUCT.md` defines the brand personality, target user, and design principles (warm/trustworthy/premium boutique eco-tour operator, trust-before-upsell, no stock-template genericness) plus an explicit accessibility bar (WCAG AA, visible focus states, no motion-only affordances — see `Reveal`'s `motion-reduce` handling). Read it before making visual/copy decisions on marketing sections.

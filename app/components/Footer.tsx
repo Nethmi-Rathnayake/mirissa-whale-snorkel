@@ -13,7 +13,7 @@ import {
 const QUICK_LINKS = [
   { label: "Our Journey", href: "/about" },
   { label: "Experience", href: "/#experience" },
-  { label: "Packages", href: "/#packages" },
+  { label: "Packages", href: "/packages" },
   { label: "FAQ", href: "/faq" },
 ];
 
@@ -24,13 +24,13 @@ const CONTACT_ROWS = [
   },
   {
     icon: PhoneIcon,
-    text: "+94 77 123 4567",
-    href: "tel:+94771234567",
+    text: "(076) 487 5498",
+    href: "tel:0764875498",
   },
   {
     icon: MailIcon,
-    text: "hello@mirissawhalesnorkel.com",
-    href: "mailto:hello@mirissawhalesnorkel.com",
+    text: "mirissawhalesnorkal@gmail.com",
+    href: "mailto:mirissawhalesnorkal@gmail.com",
   },
 ];
 

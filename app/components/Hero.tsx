@@ -18,22 +18,28 @@ const TYPING_SPEED_MS = 90;
 const DELETING_SPEED_MS = 45;
 const HOLD_DURATION_MS = 1500;
 
+const VIDEO_PLAYBACK_RATE = 0.5;
+
 const HERO_SLIDES = [
   {
-    src: "/images/hero-whale-underwater.png",
-    alt: "A humpback whale gliding just beneath the surface near Mirissa",
+    type: "image" as const,
+    src: "/images/whale-snorkeling-group-blue-whale.png",
+    alt: "A group of snorkelers swimming beside a massive blue whale underwater",
   },
   {
-    src: "/images/hero-diver-reef-fish.png",
-    alt: "A scuba diver gliding past a school of fish above the reef",
+    type: "video" as const,
+    src: "/videos/home-hero-clip.mp4",
+    alt: "Underwater footage of Mirissa's marine life",
   },
   {
-    src: "/images/hero-whale-shark-divers.png",
-    alt: "Two divers giving the OK sign as a whale shark passes overhead",
+    type: "image" as const,
+    src: "/images/humpback-whale-tail-breach.png",
+    alt: "A humpback whale's tail rising out of the water mid-breach",
   },
   {
-    src: "/images/hero-snorkelers-reef.png",
-    alt: "A family snorkeling together over a vibrant coral reef",
+    type: "image" as const,
+    src: "/images/blue-whale-spouting.png",
+    alt: "A blue whale surfacing and spouting near the boat",
   },
 ];
 
@@ -82,19 +88,39 @@ export default function Hero() {
 
   return (
     <section className="relative flex min-h-[max(720px,94vh)] w-full items-start overflow-hidden pb-24 pt-8">
-      {HERO_SLIDES.map((slide, i) => (
-        <Image
-          key={slide.src}
-          src={slide.src}
-          alt={slide.alt}
-          fill
-          priority={i === 0}
-          sizes="100vw"
-          className={`object-cover transition-opacity duration-1000 ease-in-out ${
-            i === index ? "opacity-100" : "opacity-0"
-          }`}
-        />
-      ))}
+      {HERO_SLIDES.map((slide, i) =>
+        slide.type === "video" ? (
+          <video
+            key={slide.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-label={slide.alt}
+            ref={(video) => {
+              if (video) video.playbackRate = VIDEO_PLAYBACK_RATE;
+            }}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ease-in-out ${
+              i === index ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <source src={slide.src} type="video/mp4" />
+          </video>
+        ) : (
+          <Image
+            key={slide.src}
+            src={slide.src}
+            alt={slide.alt}
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            className={`object-cover transition-opacity duration-1000 ease-in-out ${
+              i === index ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        )
+      )}
       <div
         className="absolute inset-0 bg-gradient-to-b from-[#040f1a]/80 via-[#040f1a]/45 to-[#040f1a]/20"
         aria-hidden="true"
@@ -112,11 +138,11 @@ export default function Hero() {
           </span>
 
           <h1 className="mt-6 font-inter text-4xl font-medium leading-[1.15] tracking-tight sm:text-6xl lg:text-[64px]">
-            <span className="mt-[10px] block whitespace-nowrap text-[clamp(1.1rem,5.6vw,4rem)] text-[#5EC8F0]">
+            <span className="mt-[10px] block text-[clamp(2rem,7vw,4rem)] text-[#5EC8F0]">
               Dive Into The Deep Blue Sea
             </span>
             <span className="block text-white">And See The World&rsquo;s</span>
-            <span className="block whitespace-nowrap text-[clamp(1.75rem,8vw,4rem)] text-[#E0BF00]">
+            <span className="block text-[clamp(2.25rem,9vw,4rem)] text-[#E0BF00]">
               <span aria-hidden="true">
                 {typedText}
                 <span

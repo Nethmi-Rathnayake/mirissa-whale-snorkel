@@ -6,7 +6,7 @@ export default function FaqHero() {
     <section className="relative w-full overflow-hidden">
       <div className="relative h-[38vh] min-h-[320px] w-full">
         <Image
-          src="/images/whale-breach.jpg"
+          src="/images/fun-diving-turtle-sandy-bottom.png"
           alt=""
           fill
           priority
