@@ -15,14 +15,29 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
   return (
     <>
       <section className="relative flex h-[46vh] min-h-[380px] w-full items-end overflow-hidden">
-        <Image
-          src={pkg.heroImage}
-          alt={pkg.heroImageAlt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        {pkg.heroVideo ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={pkg.heroImage}
+            aria-label={pkg.heroImageAlt}
+            className="absolute inset-0 h-full w-full object-cover"
+          >
+            <source src={pkg.heroVideo} type="video/mp4" />
+          </video>
+        ) : (
+          <Image
+            src={pkg.heroImage}
+            alt={pkg.heroImageAlt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
         <div
           className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10"
           aria-hidden="true"

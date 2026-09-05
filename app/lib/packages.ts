@@ -40,6 +40,7 @@ export type TourPackage = {
   cardImageAlt: string;
   heroImage: string;
   heroImageAlt: string;
+  heroVideo?: string;
   price: PriceInfo;
   sidebarFacts: SidebarFact[];
   sections: PackageSection[];
@@ -66,6 +67,14 @@ export const packages: TourPackage[] = [
     cardImageAlt: "A snorkeler swimming alongside two blue whales underwater",
     heroImage: "/images/whale-snorkeling-group-blue-whale.png",
     heroImageAlt: "A group of snorkelers swimming beside a massive blue whale underwater",
+    heroVideo: "/videos/whale-snorkeling-hero.mp4",
+    videos: [
+      { src: "/videos/whale-snorkeling-clip-1.mp4", label: "In the Water with Whales" },
+      { src: "/videos/whale-snorkeling-clip-2.mp4", label: "Snorkeling Alongside Giants" },
+      { src: "/videos/whale-snorkeling-clip-3.mp4", label: "A Close Encounter" },
+      { src: "/videos/whale-snorkeling-clip-4.mp4", label: "Whale Snorkeling Highlights" },
+      { src: "/videos/whale-snorkeling-clip-5.mp4", label: "Guided by Our Crew" },
+    ],
     price: {
       kind: "tiered",
       tiers: [
@@ -646,6 +655,9 @@ export const packages: TourPackage[] = [
     heroImageAlt: "A couple snorkeling together, holding hands underwater",
     videos: [
       { src: "/videos/snorkeling-with-turtles-clip-1.mp4", label: "Snorkeling with Turtles Highlights" },
+      { src: "/videos/snorkeling-with-turtles-clip-2.mp4", label: "Face to Face with a Turtle" },
+      { src: "/videos/snorkeling-with-turtles-clip-3.mp4", label: "A Gentle Encounter" },
+      { src: "/videos/snorkeling-with-turtles-clip-4.mp4", label: "Guided Turtle Snorkel" },
     ],
     price: {
       kind: "flat",
