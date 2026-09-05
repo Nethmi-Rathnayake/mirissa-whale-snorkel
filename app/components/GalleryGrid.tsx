@@ -334,7 +334,7 @@ export default function GalleryGrid() {
         >
           {visibleImages.map((item, index) => (
             <Reveal
-              key={item.src}
+              key={`${item.category}-${item.src}`}
               delay={(index % 4) * 90}
               className={`h-full ${item.span}`}
             >
