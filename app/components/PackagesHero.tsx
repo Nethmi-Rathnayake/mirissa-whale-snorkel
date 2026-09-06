@@ -13,8 +13,8 @@ export default function PackagesHero() {
     <section className="relative w-full overflow-hidden bg-ivory pb-6 sm:pb-8">
       <div className="relative h-[60vh] min-h-[440px] w-full sm:h-[64vh] lg:h-[70vh]">
         <Image
-          src="/images/packages-hero-boat.png"
-          alt="Guide steering a boat out across Mirissa's turquoise water"
+          src="/images/packages-hero-snorkeler-whale.png"
+          alt="Snorkeler swimming above two blue whales in deep open water"
           fill
           priority
           sizes="100vw"

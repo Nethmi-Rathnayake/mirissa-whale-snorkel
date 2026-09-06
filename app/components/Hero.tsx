@@ -87,7 +87,7 @@ export default function Hero() {
   }, [typedText, isDeleting, wordIndex]);
 
   return (
-    <section className="relative flex min-h-[max(720px,94vh)] w-full items-start overflow-hidden pb-24 pt-8">
+    <section className="relative flex min-h-[max(720px,94vh)] w-full items-start overflow-hidden pb-24 pt-2 sm:pt-8">
       {HERO_SLIDES.map((slide, i) =>
         slide.type === "video" ? (
           <video
@@ -131,14 +131,14 @@ export default function Hero() {
       />
 
       <div className="relative z-10 w-full px-6 lg:px-16">
-        <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
-          <span className="mt-[20px] inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#040f1a]/60 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white backdrop-blur-sm">
+        <div className="mx-auto flex max-w-5xl flex-col items-start text-left sm:items-center sm:text-center">
+          <span className="mt-1 inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#040f1a]/60 px-4 py-1.5 text-[10px] font-medium uppercase tracking-[0.18em] text-white backdrop-blur-sm sm:mt-[20px] sm:text-xs">
             <WhaleTailIcon className="h-3.5 w-3.5 text-[#5EC8F0]" />
             Whale Watching in Mirissa
           </span>
 
-          <h1 className="mt-6 font-inter text-4xl font-medium leading-[1.15] tracking-tight sm:text-6xl lg:text-[64px]">
-            <span className="mt-[10px] block text-[clamp(2rem,7vw,4rem)] text-[#5EC8F0]">
+          <h1 className="mt-3 font-inter text-4xl font-medium leading-[1.15] tracking-tight sm:mt-6 sm:text-6xl lg:text-[64px]">
+            <span className="mt-[10px] block text-[clamp(2.5rem,9vw,4rem)] font-bold text-[#5EC8F0]">
               Dive Into The Deep Blue Sea
             </span>
             <span className="block text-white">And See The World&rsquo;s</span>
@@ -154,12 +154,12 @@ export default function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-md text-base leading-relaxed text-white/75 sm:text-lg">
+          <p className="mt-3 max-w-md text-base leading-relaxed text-white/75 sm:mt-6 sm:text-lg">
             An unforgettable ocean adventure where you can witness majestic
             whales in their natural habitat.
           </p>
 
-          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+          <div className="mt-5 flex flex-col items-start gap-4 sm:mt-8 sm:flex-row sm:items-center sm:justify-center">
             <a
               href="#packages"
               className="flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#3FB6E8] to-[#1C86C9] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-lg shadow-[#1C86C9]/30 transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
