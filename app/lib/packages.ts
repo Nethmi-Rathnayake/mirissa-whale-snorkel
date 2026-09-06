@@ -74,6 +74,10 @@ export const packages: TourPackage[] = [
       { src: "/videos/whale-snorkeling-clip-3.mp4", label: "A Close Encounter" },
       { src: "/videos/whale-snorkeling-clip-4.mp4", label: "Whale Snorkeling Highlights" },
       { src: "/videos/whale-snorkeling-clip-5.mp4", label: "Guided by Our Crew" },
+      { src: "/videos/whale-snorkeling-clip-6.mp4", label: "Whale Snorkeling Adventure" },
+      { src: "/videos/whale-snorkeling-clip-7.mp4", label: "Out on the Boat" },
+      { src: "/videos/whale-snorkeling-clip-8.mp4", label: "Whale Sighting" },
+      { src: "/videos/whale-snorkeling-clip-9.mp4", label: "In the Water" },
     ],
     price: {
       kind: "tiered",
@@ -750,10 +754,10 @@ export const packages: TourPackage[] = [
     description:
       "Night diving reveals a completely different reef: lobsters, crabs and moray eels emerge to hunt, sleeping turtles and reef fish tuck into the coral, and disturbed plankton can glow blue-green in the beam of your torch. For certified divers only, guided by a PADI/SSI Divemaster from sunset.",
     popular: false,
-    cardImage: "/images/coral-reef.jpg",
-    cardImageAlt: "A coral reef lit by a diver's torch at night",
-    heroImage: "/images/journey-beyond-surface.jpg",
-    heroImageAlt: "A diver descending into deep blue water",
+    cardImage: "/images/night-diving-card.jpg",
+    cardImageAlt: "Divers with torches inspecting a coral reef at night",
+    heroImage: "/images/night-diving-hero.jpg",
+    heroImageAlt: "Divers exploring a reef lit only by their torches at night",
     price: {
       kind: "flat",
       price: 65,
@@ -847,10 +851,10 @@ export const packages: TourPackage[] = [
     description:
       "Designed for young explorers, Bubblemaker and Seal Team give kids their first taste of breathing underwater in a controlled, shallow setting. An instructor holds their hand throughout the dive, so there's nothing to worry about but the fun of it.",
     popular: false,
-    cardImage: "/images/bubblemaker-lionfish-coral.jpg",
-    cardImageAlt: "A lionfish resting on the coral at a shallow Mirissa reef",
-    heroImage: "/images/bubblemaker-fish-school-rocky-reef.png",
-    heroImageAlt: "A school of reef fish over a shallow, rocky reef",
+    cardImage: "/images/bubblemaker-instructor-child-pool.jpg",
+    cardImageAlt: "An instructor holding a child's hand during a pool scuba introduction",
+    heroImage: "/images/bubblemaker-girls-pool-scuba.jpg",
+    heroImageAlt: "Two kids in scuba gear smiling in the pool during a Bubblemaker session",
     videos: [
       { src: "/videos/padi-bubblemaker-clip-1.mp4", label: "Kids' First Dive" },
       { src: "/videos/padi-bubblemaker-clip-2.mp4", label: "Shallow Reef Exploring" },

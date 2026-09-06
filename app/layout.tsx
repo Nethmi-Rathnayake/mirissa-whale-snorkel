@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Inter, Playfair_Display } from "next/font/google";
+import FloatingContactButtons from "./components/FloatingContactButtons";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-ivory font-sans text-ink">
         {children}
+        <FloatingContactButtons />
       </body>
     </html>
   );
