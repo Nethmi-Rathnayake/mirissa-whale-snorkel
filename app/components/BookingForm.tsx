@@ -25,12 +25,14 @@ export default function BookingForm({ packageName }: { packageName: string }) {
     return (
       <div className="rounded-3xl border border-border/80 bg-white p-8 text-center shadow-sm sm:p-10">
         <h1 className="text-2xl font-bold tracking-tight">
-          Request Received
+          Booking Confirmed
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-body">
-          Thanks — we&rsquo;ve received your booking request for{" "}
-          <span className="font-semibold text-ink">{packageName}</span>. Our
-          team will contact you shortly to confirm the details.
+          Thanks — your booking for{" "}
+          <span className="font-semibold text-ink">{packageName}</span> has
+          been successfully received and confirmed. We&rsquo;ll arrange your
+          pickup and meeting at the confirmed date, time and location, and
+          we&rsquo;ve sent a confirmation email with your booking details.
         </p>
         <Link
           href="/packages"
@@ -60,26 +62,50 @@ export default function BookingForm({ packageName }: { packageName: string }) {
 
           const form = e.currentTarget;
           const formData = new FormData(form);
-          formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-          formData.append("subject", `Booking Request - ${packageName}`);
+          const payload = Object.fromEntries(formData.entries());
+
+          // 1. Notify the agency with the full booking details via Web3Forms.
+          // This must run client-side: Web3Forms' free-tier API rejects
+          // server-to-server submissions.
+          const web3FormData = new FormData(form);
+          web3FormData.append("access_key", WEB3FORMS_ACCESS_KEY);
+          web3FormData.append(
+            "subject",
+            `New Booking Received - Mirissa Whale Snorkel`
+          );
 
           try {
             const response = await fetch("https://api.web3forms.com/submit", {
               method: "POST",
-              body: formData,
+              body: web3FormData,
             });
             const result = await response.json();
 
-            if (response.ok && result.success) {
-              setSubmitted(true);
-              form.reset();
-              setBookingDate("");
-              setBookingTime("");
-            } else {
+            if (!response.ok || !result.success) {
               setErrorMessage(
                 result.message || "Something went wrong. Please try again."
               );
+              return;
             }
+
+            // 2. Send the customer their confirmation email. This goes through
+            // our own server route, since it needs a real SMTP credential that
+            // must never reach the browser. A failure here shouldn't block the
+            // booking itself — the agency has already been notified above.
+            try {
+              await fetch("/api/booking", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+              });
+            } catch (error) {
+              console.error("Customer confirmation email request failed:", error);
+            }
+
+            setSubmitted(true);
+            form.reset();
+            setBookingDate("");
+            setBookingTime("");
           } catch {
             setErrorMessage("Something went wrong. Please try again.");
           } finally {
