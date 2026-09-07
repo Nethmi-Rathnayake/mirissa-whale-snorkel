@@ -56,15 +56,43 @@ function guestSummary(adults: string, children?: string) {
   return `${adultLabel}, ${childCount} Child${childCount === 1 ? "" : "ren"}`;
 }
 
+async function sendTelegramNotification(text: string) {
+  const botToken = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (!botToken || !chatId) {
+    console.error("TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID is not configured.");
+    return false;
+  }
+
+  const response = await fetch(
+    `https://api.telegram.org/bot${botToken}/sendMessage`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text }),
+    }
+  );
+  const result = await response.json();
+
+  if (!response.ok || !result.ok) {
+    console.error("Telegram notification rejected:", result);
+    return false;
+  }
+
+  return true;
+}
+
 /**
- * Sends the customer's "Booking Confirmed" email via Gmail SMTP.
+ * Sends the customer's "Booking Confirmed" email via Gmail SMTP, and
+ * notifies the agency's Telegram chat.
  *
- * The agency notification is sent separately, client-side, directly to
- * Web3Forms — its free-tier API rejects server-to-server calls ("Use our
- * API in client side or contact support with server IP address (Pro plan
- * is required)"), so it can't be moved here. This route only handles the
- * customer confirmation, since that needs a real SMTP credential that must
- * never reach the browser.
+ * The Web3Forms agency-email notification is sent separately, client-side,
+ * directly to Web3Forms — its free-tier API rejects server-to-server calls
+ * ("Use our API in client side or contact support with server IP address
+ * (Pro plan is required)"), so it can't be moved here. Both the customer
+ * email and the Telegram message need real secrets (SMTP credential, bot
+ * token) that must never reach the browser, so they run here instead.
  */
 export async function POST(request: Request) {
   let payload: BookingPayload;
@@ -119,17 +147,6 @@ export async function POST(request: Request) {
   > &
     BookingPayload;
 
-  const gmailUser = process.env.GMAIL_USER;
-  const gmailPassword = process.env.GMAIL_APP_PASSWORD;
-
-  if (!gmailUser || !gmailPassword) {
-    console.error("GMAIL_USER / GMAIL_APP_PASSWORD is not configured.");
-    return Response.json(
-      { success: false, message: "Confirmation email is not configured." },
-      { status: 500 }
-    );
-  }
-
   const formattedDate = formatDate(bookingDate);
   const formattedTime = formatTime(bookingTime);
   const guests = guestSummary(adults, children);
@@ -147,6 +164,50 @@ export async function POST(request: Request) {
     ["Passport Number", passportNumber || "Not provided"],
     ["Additional Requests / Questions", additionalRequests || "None"],
   ];
+
+  const telegramText = [
+    "🐋 New Booking Received",
+    "",
+    ...detailRows.map(([label, value]) => `${label}: ${value}`),
+    "",
+    `Customer: ${name} (${email})`,
+  ].join("\n");
+
+  const [emailResult, telegramResult] = await Promise.allSettled([
+    sendCustomerConfirmationEmail({ name, email, detailRows }),
+    sendTelegramNotification(telegramText),
+  ]);
+
+  const emailOk = emailResult.status === "fulfilled" && emailResult.value;
+  const telegramOk =
+    telegramResult.status === "fulfilled" && telegramResult.value;
+
+  if (emailResult.status === "rejected") {
+    console.error("Customer confirmation email failed:", emailResult.reason);
+  }
+  if (telegramResult.status === "rejected") {
+    console.error("Telegram notification failed:", telegramResult.reason);
+  }
+
+  return Response.json({ success: emailOk, emailSent: emailOk, telegramSent: telegramOk });
+}
+
+async function sendCustomerConfirmationEmail({
+  name,
+  email,
+  detailRows,
+}: {
+  name: string;
+  email: string;
+  detailRows: [string, string][];
+}) {
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPassword = process.env.GMAIL_APP_PASSWORD;
+
+  if (!gmailUser || !gmailPassword) {
+    console.error("GMAIL_USER / GMAIL_APP_PASSWORD is not configured.");
+    return false;
+  }
 
   try {
     const transporter = nodemailer.createTransport({
@@ -207,12 +268,9 @@ export async function POST(request: Request) {
       html: htmlBody,
     });
 
-    return Response.json({ success: true });
+    return true;
   } catch (error) {
     console.error("Customer confirmation email failed:", error);
-    return Response.json(
-      { success: false, message: "Could not send the confirmation email." },
-      { status: 502 }
-    );
+    return false;
   }
 }
