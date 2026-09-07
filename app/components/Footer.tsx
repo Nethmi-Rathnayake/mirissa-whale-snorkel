@@ -65,13 +65,13 @@ export default function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.9fr_1.1fr_1.1fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full">
+              <span className="relative h-14 w-[84px] shrink-0">
                 <Image
                   src="/images/logo.png"
                   alt="Mirissa Whale Snorkel logo"
                   fill
-                  sizes="40px"
-                  className="object-cover"
+                  sizes="84px"
+                  className="object-contain"
                 />
               </span>
               <span className="text-[1.05rem] font-semibold tracking-tight">

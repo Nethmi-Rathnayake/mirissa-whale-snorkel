@@ -164,14 +164,8 @@ export default function Hero() {
               href="#packages"
               className="flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#3FB6E8] to-[#1C86C9] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-lg shadow-[#1C86C9]/30 transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              <span className="relative h-5 w-5 shrink-0 overflow-hidden rounded-full">
-                <Image
-                  src="/images/logo.png"
-                  alt=""
-                  fill
-                  sizes="20px"
-                  className="object-cover"
-                />
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white text-[#1C86C9]">
+                <WhaleTailIcon className="h-3.5 w-3.5" />
               </span>
               Explore Packages
             </a>

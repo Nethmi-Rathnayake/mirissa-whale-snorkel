@@ -30,17 +30,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-cream/90 backdrop-blur-md">
       <div className="flex items-center justify-between px-6 py-4 lg:px-16">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full">
+        <Link href="/" className="flex min-w-0 shrink-0 items-center gap-2.5">
+          <span className="relative h-11 w-[66px] shrink-0 sm:h-12 sm:w-[72px]">
             <Image
               src="/images/logo.png"
               alt="Mirissa Whale Snorkel logo"
               fill
-              sizes="36px"
-              className="object-cover"
+              sizes="72px"
+              className="object-contain"
             />
           </span>
-          <span className="whitespace-nowrap text-sm font-semibold leading-tight tracking-tight sm:text-base lg:text-[1.05rem]">
+          <span className="hidden truncate text-sm font-semibold leading-tight tracking-tight text-ink sm:inline lg:text-[1.05rem]">
             Mirissa Whale Snorkel
           </span>
         </Link>
