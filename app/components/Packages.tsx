@@ -85,7 +85,7 @@ export default function Packages() {
                   </p>
 
                   <Link
-                    href={`/packages/${pkg.slug}#price`}
+                    href={`/packages/${pkg.slug}`}
                     className={`mt-4 rounded-full px-6 py-3.5 text-center text-sm font-semibold transition-colors ${
                       pkg.popular
                         ? "bg-accent text-white hover:bg-accent-dark"

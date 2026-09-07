@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Inter, Playfair_Display } from "next/font/google";
 import FloatingContactButtons from "./components/FloatingContactButtons";
+import ScrollToTop from "./components/ScrollToTop";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${dmSans.variable} ${playfairDisplay.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory font-sans text-ink">
+        <ScrollToTop />
         {children}
         <FloatingContactButtons />
       </body>
