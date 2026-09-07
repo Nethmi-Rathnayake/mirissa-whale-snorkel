@@ -52,6 +52,8 @@ The `<!-- BEGIN:nextjs-agent-rules -->…<!-- END:nextjs-agent-rules -->` block 
 
 Each of these route files sets its own `export const metadata: Metadata` (title/description) rather than relying on a shared layout default — follow that pattern for any new route.
 
+`app/layout.tsx` renders `FloatingContactButtons` (fixed-position WhatsApp + email buttons) once, outside `children`, so it appears on every route without each page needing to include it.
+
 **Package data** lives entirely in `app/lib/packages.ts`, not in any CMS or database:
 - `packages: TourPackage[]` is the single source of truth for tour content (pricing, images, features, species, logistics). `Packages` (the grid rendered on both the home page and `/packages`) and `PackageDetail` (the `[slug]` page) both render from this array — add a new tour by appending to it.
 - `getPackageBySlug(slug)` powers the dynamic route's lookup and 404 (`notFound()`) handling.

@@ -59,7 +59,7 @@ export const packages: TourPackage[] = [
     slug: "whale-snorkeling",
     name: "Whale Snorkeling",
     tagline:
-      "Slip into the water and swim alongside gentle giants in their natural habitat.",
+      "Swim with the giants of the ocean in the blue waters of Mirissa... Are you ready?",
     description:
       "Our signature in-water encounter pairs a scenic boat cruise with a respectful, guided snorkel alongside blue and sperm whales. Small groups and calm, careful entries mean more time watching and less time waiting.",
     popular: false,
@@ -82,6 +82,7 @@ export const packages: TourPackage[] = [
     price: {
       kind: "tiered",
       tiers: [
+        { persons: "1 Person", price: 125 },
         { persons: "2 Persons", price: 250 },
         { persons: "3 Persons", price: 325 },
         { persons: "4 Persons", price: 400 },
@@ -203,10 +204,10 @@ export const packages: TourPackage[] = [
     description:
       "No swimming required. Cruise out from Mirissa Fisheries Harbour in a small group and watch for blows, breaches and fins as we follow marine park guidelines every step of the way.",
     popular: true,
-    cardImage: "/images/blue-whale-spouting.png",
-    cardImageAlt: "A blue whale surfacing and spouting near the boat",
-    heroImage: "/images/turtle-snorkeler-boy.png",
-    heroImageAlt: "A child snorkeling over a shallow reef",
+    cardImage: "/images/blue-whale-spout-closeup.png",
+    cardImageAlt: "A blue whale surfacing with its blowhole spouting a tall column of mist",
+    heroImage: "/images/whale-tails-aerial.jpg",
+    heroImageAlt: "Aerial view of two whale tails surfacing side by side in deep blue water",
     price: {
       kind: "flat",
       price: 45,
@@ -310,7 +311,7 @@ export const packages: TourPackage[] = [
     slug: "dolphin-watching",
     name: "Dolphin Watching Tour",
     tagline:
-      "Watch playful spinner and bottlenose dolphins ride the bow in Mirissa's morning waters.",
+      "Come to Mirissa to watch the dance of the ocean giants.",
     description:
       "Large pods of dolphins are a near-daily sight on our morning boat trips. We follow them at a respectful distance from the deck — no swimming required — on the same comfortable catamaran as our Whale Watching Tour.",
     popular: false,
@@ -379,7 +380,7 @@ export const packages: TourPackage[] = [
     slug: "fun-diving",
     name: "Fun Diving",
     tagline:
-      "Two-tank boat dives, night dives and refreshers for certified divers exploring Mirissa's reefs and rock pinnacles.",
+      "To see the other side of Mirissa that no one sees, you have to go under the sea.",
     description:
       "For certified divers who just want to get in the water, our Fun Diving trips run daily from Mirissa's dive centers — single dives, two-tank morning trips, night dives and refresher sessions are all available, with full rental gear and a PADI/SSI divemaster on every trip.",
     popular: false,
@@ -529,7 +530,7 @@ export const packages: TourPackage[] = [
     slug: "discover-scuba-diving",
     name: "Discover Scuba Diving",
     tagline:
-      "No experience needed — get a full introduction to scuba and take your first breaths underwater with an instructor by your side.",
+      "Your first steps underwater... the most beautiful marine experience in Mirissa is with us!",
     description:
       "Never dived before? Discover Scuba Diving is a guided, 1:1 first experience for complete beginners — no certification or prior swimming skill required. After a shore-side briefing on breathing and hand signals, your instructor takes you into Mirissa's calm, shallow reefs for a gentle introduction to life underwater.",
     popular: false,
@@ -649,7 +650,7 @@ export const packages: TourPackage[] = [
     slug: "snorkeling-with-turtles",
     name: "Snorkeling with Turtles",
     tagline:
-      "Meet Mirissa's gentle sea turtles face to face on a guided snorkel over their favorite feeding grounds.",
+      "Are you ready to meet the cute friends floating in the sea of Mirissa?",
     description:
       "A relaxed, family-friendly snorkel out to a turtle feeding site just off Mirissa. Life jackets mean even non-swimmers can join safely, and our guide keeps a respectful distance so you can watch these gentle animals without disturbing them.",
     popular: false,
@@ -750,7 +751,7 @@ export const packages: TourPackage[] = [
     slug: "night-diving",
     name: "Night Diving",
     tagline:
-      "Explore Mirissa's reefs after dark and watch nocturnal reef life — and bioluminescent plankton — come alive.",
+      "To see the secrets of Mirissa you don't see by day, you've got to dive at night.",
     description:
       "Night diving reveals a completely different reef: lobsters, crabs and moray eels emerge to hunt, sleeping turtles and reef fish tuck into the coral, and disturbed plankton can glow blue-green in the beam of your torch. For certified divers only, guided by a PADI/SSI Divemaster from sunset.",
     popular: false,
@@ -847,7 +848,7 @@ export const packages: TourPackage[] = [
     slug: "padi-bubblemaker-seal-team",
     name: "PADI Bubblemaker & Seal Team",
     tagline:
-      "A safe, playful introduction to scuba for kids, in a pool or a calm, shallow stretch of reef with 1:1 instructor support.",
+      "Let's dive into the world of fish and talk through bubbles.",
     description:
       "Designed for young explorers, Bubblemaker and Seal Team give kids their first taste of breathing underwater in a controlled, shallow setting. An instructor holds their hand throughout the dive, so there's nothing to worry about but the fun of it.",
     popular: false,

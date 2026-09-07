@@ -80,7 +80,7 @@ export default function Packages() {
                     <span className="text-xs text-body">
                       {pkg.price.kind === "flat"
                         ? `/ ${pkg.price.unit.replace("USD per ", "")}`
-                        : "(2–4 persons)"}
+                        : "(1–4 persons)"}
                     </span>
                   </p>
 
