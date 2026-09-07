@@ -92,7 +92,7 @@ export default function Packages() {
                         : "bg-ink text-ivory hover:bg-ink/85"
                     }`}
                   >
-                    Book Now
+                    View Package
                   </Link>
                 </div>
               </div>

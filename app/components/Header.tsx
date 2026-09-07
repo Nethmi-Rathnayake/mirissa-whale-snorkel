@@ -46,15 +46,15 @@ export default function Header() {
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex xl:gap-12">
-          <nav className="flex items-center gap-5 text-sm font-bold text-ink/80 xl:gap-9">
+          <nav className="flex items-center gap-1 text-sm font-bold">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className={`transition-colors hover:text-ink ${
+                className={`rounded-full border px-4 py-2 transition-colors duration-100 active:scale-95 ${
                   link.label === activeLabel
-                    ? "border-b-2 border-accent pb-1 text-ink"
-                    : "border-b-2 border-transparent pb-1"
+                    ? "border-ink bg-ink text-ivory"
+                    : "border-transparent text-ink/80 hover:border-border hover:bg-white hover:text-ink"
                 }`}
               >
                 {link.label}
@@ -89,8 +89,10 @@ export default function Header() {
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className={`rounded-lg px-2 py-3 transition-colors hover:bg-cream hover:text-ink ${
-                  link.label === activeLabel ? "bg-cream text-ink" : ""
+                className={`rounded-full border px-4 py-3 transition-colors duration-100 active:scale-95 ${
+                  link.label === activeLabel
+                    ? "border-ink bg-ink text-ivory"
+                    : "border-transparent hover:border-border hover:bg-white hover:text-ink"
                 }`}
               >
                 {link.label}

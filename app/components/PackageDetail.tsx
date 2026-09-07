@@ -184,10 +184,8 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
                 })}
               </div>
 
-              <a
-                href={`mailto:mirissawhalesnorkal@gmail.com?subject=${encodeURIComponent(
-                  `Booking Enquiry - ${pkg.name}`
-                )}`}
+              <Link
+                href={`/packages/${pkg.slug}/book`}
                 className={`mt-8 block rounded-full px-6 py-3.5 text-center text-sm font-semibold transition-colors ${
                   pkg.popular
                     ? "bg-accent text-white hover:bg-accent-dark"
@@ -195,7 +193,7 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
                 }`}
               >
                 Book Now
-              </a>
+              </Link>
             </div>
           </div>
         </div>
