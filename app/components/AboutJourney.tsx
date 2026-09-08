@@ -40,8 +40,8 @@ export default function AboutJourney() {
 
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">
           <Image
-            src="/images/blue-whale-underwater-side.png"
-            alt="A blue whale gliding through open water"
+            src="/images/blue-whale-sunbeams.png"
+            alt="A blue whale gliding underwater as sunbeams filter through the water"
             fill
             sizes="(min-width: 1024px) 45vw, 90vw"
             className="object-cover"
