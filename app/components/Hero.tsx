@@ -28,7 +28,7 @@ const HERO_SLIDES = [
   },
   {
     type: "video" as const,
-    src: "/videos/home-hero-clip.mp4",
+    src: "https://res.cloudinary.com/ehjp8bsp/video/upload/v1788870016/mirissa-whale-snorkel/home-hero-clip.mp4",
     alt: "Underwater footage of Mirissa's marine life",
   },
   {
