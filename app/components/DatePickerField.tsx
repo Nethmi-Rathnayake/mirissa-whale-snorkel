@@ -59,7 +59,7 @@ export default function DatePickerField({
   value,
   onChange,
 }: DatePickerFieldProps) {
-  const { containerRef, mounted, visible, toggle, close } =
+  const { containerRef, panelRef, mounted, visible, placement, toggle, close } =
     useAnimatedPopover();
   const today = startOfDay(new Date());
   const selected = value ? startOfDay(new Date(value)) : null;
@@ -103,17 +103,24 @@ export default function DatePickerField({
 
         <span
           aria-hidden="true"
-          className={`pointer-events-none absolute left-1/2 top-full z-30 w-px -translate-x-1/2 bg-accent/50 transition-all duration-300 ease-out ${
-            visible ? "h-2 opacity-100" : "h-0 opacity-0"
-          }`}
+          className={`pointer-events-none absolute left-1/2 z-30 w-px -translate-x-1/2 bg-accent/50 transition-all duration-300 ease-out ${
+            placement === "top" ? "bottom-full" : "top-full"
+          } ${visible ? "h-2 opacity-100" : "h-0 opacity-0"}`}
         />
 
         {mounted && (
           <div
-            className={`absolute left-0 top-full z-30 mt-2 w-72 origin-top rounded-2xl border border-border bg-white p-4 shadow-xl transition-all duration-300 ease-out ${
+            ref={panelRef}
+            className={`absolute left-0 z-30 w-72 rounded-2xl border border-border bg-white p-4 shadow-xl transition-all duration-300 ease-out ${
+              placement === "top"
+                ? "bottom-full mb-2 origin-bottom"
+                : "top-full mt-2 origin-top"
+            } ${
               visible
                 ? "translate-y-0 scale-y-100 opacity-100"
-                : "-translate-y-1 scale-y-95 opacity-0"
+                : placement === "top"
+                  ? "translate-y-1 scale-y-95 opacity-0"
+                  : "-translate-y-1 scale-y-95 opacity-0"
             }`}
           >
             <div className="flex items-center justify-between">

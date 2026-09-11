@@ -5,11 +5,25 @@ import { useEffect, useRef, useState } from "react";
 export function useAnimatedPopover() {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [placement, setPlacement] = useState<"top" | "bottom">("bottom");
   const containerRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const open = () => {
     setMounted(true);
     requestAnimationFrame(() => {
+      const container = containerRef.current;
+      const panel = panelRef.current;
+      if (container && panel) {
+        const rect = container.getBoundingClientRect();
+        const spaceBelow = window.innerHeight - rect.bottom;
+        const spaceAbove = rect.top;
+        setPlacement(
+          spaceBelow < panel.offsetHeight + 16 && spaceAbove > spaceBelow
+            ? "top"
+            : "bottom"
+        );
+      }
       requestAnimationFrame(() => setVisible(true));
     });
   };
@@ -44,5 +58,5 @@ export function useAnimatedPopover() {
     };
   }, [mounted]);
 
-  return { containerRef, mounted, visible, open, close, toggle };
+  return { containerRef, panelRef, mounted, visible, placement, open, close, toggle };
 }
