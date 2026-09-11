@@ -90,7 +90,7 @@ export default function GalleryHero() {
             <span className="relative hidden h-14 w-14 shrink-0 overflow-hidden rounded-xl sm:block">
               <Image
                 src={selected.heroImage}
-                alt=""
+                alt={selected.heroImageAlt}
                 fill
                 sizes="56px"
                 className="object-cover transition-opacity duration-300"

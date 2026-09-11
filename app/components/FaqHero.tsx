@@ -7,7 +7,7 @@ export default function FaqHero() {
       <div className="relative h-[38vh] min-h-[320px] w-full">
         <Image
           src="/images/fun-diving-turtle-sandy-bottom.png"
-          alt=""
+          alt="A diver hovering above a turtle gliding over the sandy sea floor"
           fill
           priority
           sizes="100vw"

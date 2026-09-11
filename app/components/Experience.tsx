@@ -50,7 +50,7 @@ export default function Experience() {
                 <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/10 text-accent">
                   <Image
                     src={feature.image}
-                    alt=""
+                    alt={feature.title}
                     fill
                     sizes="48px"
                     className="object-contain p-1.5"
