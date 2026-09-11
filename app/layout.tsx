@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import { DM_Sans, Inter, Playfair_Display } from "next/font/google";
 import FloatingContactButtons from "./components/FloatingContactButtons";
 import ScrollToTop from "./components/ScrollToTop";
+import {
+  SITE_NAME,
+  SITE_URL,
+  defaultOpenGraph,
+  defaultOpenGraphImage,
+} from "./lib/seo";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -21,10 +27,78 @@ const inter = Inter({
   weight: ["600", "700", "800"],
 });
 
+const DESCRIPTION =
+  "Join Mirissa Whale Snorkel for an intimate, eco-certified whale snorkeling experience in the beautiful waters of Mirissa, Sri Lanka.";
+
 export const metadata: Metadata = {
-  title: "Mirissa Whale Snorkel | Whale Watching & Snorkeling Tours",
-  description:
-    "Join Mirissa Whale Snorkel for an intimate, eco-certified whale snorkeling experience in the beautiful waters of Mirissa, Sri Lanka.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    template: `%s | ${SITE_NAME}`,
+    default: `${SITE_NAME} | Whale Watching & Snorkeling Tours`,
+  },
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    ...defaultOpenGraph,
+    title: `${SITE_NAME} | Whale Watching & Snorkeling Tours`,
+    description: DESCRIPTION,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} | Whale Watching & Snorkeling Tours`,
+    description: DESCRIPTION,
+    images: defaultOpenGraph.images,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  // Fill in after registering with Google Search Console / Bing Webmaster
+  // Tools: verification: { google: "PASTE_GOOGLE_SEARCH_CONSOLE_CODE_HERE" },
+};
+
+const localBusinessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: SITE_NAME,
+  url: SITE_URL,
+  image: `${SITE_URL}${defaultOpenGraphImage.url}`,
+  telephone: "+94764875498",
+  email: "snorkelmirissawhale@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Mirissa Beach Road",
+    addressLocality: "Mirissa",
+    postalCode: "81740",
+    addressCountry: "LK",
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "07:00",
+    closes: "18:00",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -34,6 +108,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${dmSans.variable} ${playfairDisplay.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-ivory font-sans text-ink">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
         <ScrollToTop />
         {children}
         <FloatingContactButtons />

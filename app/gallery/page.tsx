@@ -3,11 +3,24 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GalleryHero from "../components/GalleryHero";
 import GalleryGrid from "../components/GalleryGrid";
+import { defaultOpenGraph } from "../lib/seo";
+
+const TITLE = "Gallery";
+const DESCRIPTION =
+  "Browse photos of whales, dolphins and reef life from Mirissa Whale Snorkel's whale watching and snorkeling tours in Sri Lanka.";
 
 export const metadata: Metadata = {
-  title: "Gallery | Mirissa Whale Snorkel",
-  description:
-    "Browse photos of whales, dolphins and reef life from Mirissa Whale Snorkel's whale watching and snorkeling tours in Sri Lanka.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/gallery",
+  },
+  openGraph: {
+    ...defaultOpenGraph,
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/gallery",
+  },
 };
 
 export default function GalleryPage() {

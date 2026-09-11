@@ -5,11 +5,24 @@ import AboutHero from "../components/AboutHero";
 import AboutJourney from "../components/AboutJourney";
 import AboutCrew from "../components/AboutCrew";
 import AboutSustainability from "../components/AboutSustainability";
+import { defaultOpenGraph } from "../lib/seo";
+
+const TITLE = "About Us";
+const DESCRIPTION =
+  "Meet the oceanographers, mariners and conservationists behind Mirissa Whale Snorkel's intimate, responsible whale encounters in Sri Lanka.";
 
 export const metadata: Metadata = {
-  title: "About Us | Mirissa Whale Snorkel",
-  description:
-    "Meet the oceanographers, mariners and conservationists behind Mirissa Whale Snorkel's intimate, responsible whale encounters in Sri Lanka.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    ...defaultOpenGraph,
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {

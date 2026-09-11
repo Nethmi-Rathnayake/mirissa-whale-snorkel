@@ -3,11 +3,24 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PackagesHero from "../components/PackagesHero";
 import Packages from "../components/Packages";
+import { defaultOpenGraph } from "../lib/seo";
+
+const TITLE = "Packages";
+const DESCRIPTION =
+  "Compare our whale snorkeling, whale watching, and dolphin watching tour packages in Mirissa, Sri Lanka, including pricing and what's included.";
 
 export const metadata: Metadata = {
-  title: "Packages | Mirissa Whale Snorkel",
-  description:
-    "Compare our whale snorkeling, whale watching, and dolphin watching tour packages in Mirissa, Sri Lanka, including pricing and what's included.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/packages",
+  },
+  openGraph: {
+    ...defaultOpenGraph,
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/packages",
+  },
 };
 
 export default function PackagesPage() {

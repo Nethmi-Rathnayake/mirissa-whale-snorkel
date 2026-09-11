@@ -6,11 +6,24 @@ import ContactHero from "../components/ContactHero";
 import ContactForm from "../components/ContactForm";
 import ContactInfo from "../components/ContactInfo";
 import { CameraIcon, PlayIcon, ShareIcon } from "../components/icons";
+import { defaultOpenGraph } from "../lib/seo";
+
+const TITLE = "Contact";
+const DESCRIPTION =
+  "Get in touch with Mirissa Whale Snorkel to plan your whale watching, whale snorkeling or dolphin watching trip in Mirissa, Sri Lanka.";
 
 export const metadata: Metadata = {
-  title: "Contact | Mirissa Whale Snorkel",
-  description:
-    "Get in touch with Mirissa Whale Snorkel to plan your whale watching, whale snorkeling or dolphin watching trip in Mirissa, Sri Lanka.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    ...defaultOpenGraph,
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/contact",
+  },
 };
 
 const SOCIAL_LINKS = [
