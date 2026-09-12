@@ -7,7 +7,7 @@ import Footer from "../../../components/Footer";
 import BookingForm from "../../../components/BookingForm";
 import { ArrowRightIcon } from "../../../components/icons";
 import { getPackageBySlug, packages } from "../../../lib/packages";
-import { defaultOpenGraph } from "../../../lib/seo";
+import { buildSocialMetadata } from "../../../lib/seo";
 
 export function generateStaticParams() {
   return packages.map((pkg) => ({ slug: pkg.slug }));
@@ -35,13 +35,9 @@ export async function generateMetadata({
     alternates: {
       canonical: `/packages/${pkg.slug}/book`,
     },
-    openGraph: {
-      ...defaultOpenGraph,
-      title,
-      description,
-      url: `/packages/${pkg.slug}/book`,
-      images: [{ url: pkg.heroImage, alt: pkg.heroImageAlt }],
-    },
+    ...buildSocialMetadata(title, description, `/packages/${pkg.slug}/book`, [
+      { url: pkg.heroImage, alt: pkg.heroImageAlt },
+    ]),
   };
 }
 

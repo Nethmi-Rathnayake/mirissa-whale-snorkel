@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PackagesHero from "../components/PackagesHero";
 import Packages from "../components/Packages";
-import { defaultOpenGraph } from "../lib/seo";
+import { buildSocialMetadata } from "../lib/seo";
 
 const TITLE = "Packages";
 const DESCRIPTION =
@@ -15,12 +15,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/packages",
   },
-  openGraph: {
-    ...defaultOpenGraph,
-    title: TITLE,
-    description: DESCRIPTION,
-    url: "/packages",
-  },
+  ...buildSocialMetadata(TITLE, DESCRIPTION, "/packages"),
 };
 
 export default function PackagesPage() {

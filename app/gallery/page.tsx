@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GalleryHero from "../components/GalleryHero";
 import GalleryGrid from "../components/GalleryGrid";
-import { defaultOpenGraph } from "../lib/seo";
+import { buildSocialMetadata } from "../lib/seo";
 
 const TITLE = "Gallery";
 const DESCRIPTION =
@@ -15,12 +15,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/gallery",
   },
-  openGraph: {
-    ...defaultOpenGraph,
-    title: TITLE,
-    description: DESCRIPTION,
-    url: "/gallery",
-  },
+  ...buildSocialMetadata(TITLE, DESCRIPTION, "/gallery"),
 };
 
 export default function GalleryPage() {

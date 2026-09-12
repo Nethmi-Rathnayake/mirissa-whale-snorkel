@@ -5,9 +5,10 @@ import ScrollToTop from "./components/ScrollToTop";
 import {
   SITE_NAME,
   SITE_URL,
-  defaultOpenGraph,
+  buildSocialMetadata,
   defaultOpenGraphImage,
 } from "./lib/seo";
+import { testimonials } from "./lib/testimonials";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -40,18 +41,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  openGraph: {
-    ...defaultOpenGraph,
-    title: `${SITE_NAME} | Whale Watching & Snorkeling Tours`,
-    description: DESCRIPTION,
-    url: "/",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${SITE_NAME} | Whale Watching & Snorkeling Tours`,
-    description: DESCRIPTION,
-    images: defaultOpenGraph.images,
-  },
+  ...buildSocialMetadata(
+    `${SITE_NAME} | Whale Watching & Snorkeling Tours`,
+    DESCRIPTION,
+    "/"
+  ),
   robots: {
     index: true,
     follow: true,
@@ -70,6 +64,10 @@ export const metadata: Metadata = {
   // Tools: verification: { google: "PASTE_GOOGLE_SEARCH_CONSOLE_CODE_HERE" },
 };
 
+const averageRating =
+  testimonials.reduce((sum, t) => sum + parseFloat(t.rating), 0) /
+  testimonials.length;
+
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -78,6 +76,11 @@ const localBusinessJsonLd = {
   image: `${SITE_URL}${defaultOpenGraphImage.url}`,
   telephone: "+94764875498",
   email: "snorkelmirissawhale@gmail.com",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: averageRating.toFixed(1),
+    reviewCount: testimonials.length,
+  },
   address: {
     "@type": "PostalAddress",
     streetAddress: "Mirissa Beach Road",

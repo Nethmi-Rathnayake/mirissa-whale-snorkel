@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import FaqHero from "../components/FaqHero";
 import FaqExplorer from "../components/FaqExplorer";
 import { faqCategories } from "../lib/faq";
-import { defaultOpenGraph } from "../lib/seo";
+import { buildSocialMetadata } from "../lib/seo";
 
 const TITLE = "FAQ";
 const DESCRIPTION =
@@ -16,12 +16,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/faq",
   },
-  openGraph: {
-    ...defaultOpenGraph,
-    title: TITLE,
-    description: DESCRIPTION,
-    url: "/faq",
-  },
+  ...buildSocialMetadata(TITLE, DESCRIPTION, "/faq"),
 };
 
 const faqJsonLd = {

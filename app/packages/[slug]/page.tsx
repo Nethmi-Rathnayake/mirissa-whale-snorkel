@@ -4,7 +4,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import PackageDetail from "../../components/PackageDetail";
 import { getPackageBySlug, packages } from "../../lib/packages";
-import { SITE_URL, defaultOpenGraph } from "../../lib/seo";
+import { SITE_URL, buildSocialMetadata } from "../../lib/seo";
 
 export function generateStaticParams() {
   return packages.map((pkg) => ({ slug: pkg.slug }));
@@ -29,13 +29,9 @@ export async function generateMetadata({
     alternates: {
       canonical: `/packages/${pkg.slug}`,
     },
-    openGraph: {
-      ...defaultOpenGraph,
-      title: pkg.name,
-      description: pkg.tagline,
-      url: `/packages/${pkg.slug}`,
-      images: [{ url: pkg.heroImage, alt: pkg.heroImageAlt }],
-    },
+    ...buildSocialMetadata(pkg.name, pkg.tagline, `/packages/${pkg.slug}`, [
+      { url: pkg.heroImage, alt: pkg.heroImageAlt },
+    ]),
   };
 }
 

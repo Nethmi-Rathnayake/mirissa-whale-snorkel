@@ -8,7 +8,7 @@ import Experience from "./components/Experience";
 import TrustBadges from "./components/TrustBadges";
 import Footer from "./components/Footer";
 import Reveal from "./components/Reveal";
-import { defaultOpenGraph } from "./lib/seo";
+import { buildSocialMetadata } from "./lib/seo";
 
 const TITLE = "Whale & Dolphin Watching Tours in Mirissa, Sri Lanka";
 const DESCRIPTION =
@@ -20,12 +20,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
-  openGraph: {
-    ...defaultOpenGraph,
-    title: TITLE,
-    description: DESCRIPTION,
-    url: "/",
-  },
+  ...buildSocialMetadata(TITLE, DESCRIPTION, "/"),
 };
 
 export default function Home() {

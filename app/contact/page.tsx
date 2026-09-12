@@ -6,7 +6,7 @@ import ContactHero from "../components/ContactHero";
 import ContactForm from "../components/ContactForm";
 import ContactInfo from "../components/ContactInfo";
 import { CameraIcon, PlayIcon, ShareIcon } from "../components/icons";
-import { defaultOpenGraph } from "../lib/seo";
+import { buildSocialMetadata } from "../lib/seo";
 
 const TITLE = "Contact";
 const DESCRIPTION =
@@ -18,12 +18,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/contact",
   },
-  openGraph: {
-    ...defaultOpenGraph,
-    title: TITLE,
-    description: DESCRIPTION,
-    url: "/contact",
-  },
+  ...buildSocialMetadata(TITLE, DESCRIPTION, "/contact"),
 };
 
 const SOCIAL_LINKS = [

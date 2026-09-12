@@ -5,7 +5,7 @@ import AboutHero from "../components/AboutHero";
 import AboutJourney from "../components/AboutJourney";
 import AboutCrew from "../components/AboutCrew";
 import AboutSustainability from "../components/AboutSustainability";
-import { defaultOpenGraph } from "../lib/seo";
+import { buildSocialMetadata } from "../lib/seo";
 
 const TITLE = "About Us";
 const DESCRIPTION =
@@ -17,12 +17,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/about",
   },
-  openGraph: {
-    ...defaultOpenGraph,
-    title: TITLE,
-    description: DESCRIPTION,
-    url: "/about",
-  },
+  ...buildSocialMetadata(TITLE, DESCRIPTION, "/about"),
 };
 
 export default function AboutPage() {
