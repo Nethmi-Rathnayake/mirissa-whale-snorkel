@@ -29,8 +29,8 @@ const CONTACT_ROWS = [
   },
   {
     icon: MailIcon,
-    text: "snorkelmirissawhale@gmail.com",
-    href: "mailto:snorkelmirissawhale@gmail.com",
+    text: "whalesnorkel@gmail.com",
+    href: "mailto:whalesnorkel@gmail.com",
   },
 ];
 

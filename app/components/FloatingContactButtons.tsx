@@ -11,7 +11,7 @@ const FLOATING_CONTACTS = [
   {
     icon: MailIcon,
     label: "Email us",
-    href: "mailto:snorkelmirissawhale@gmail.com",
+    href: "mailto:whalesnorkel@gmail.com",
     external: false,
     className: "bg-accent hover:bg-accent-dark",
   },

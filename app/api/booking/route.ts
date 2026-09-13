@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 
+const AGENCY_NOTIFICATION_EMAIL = "whalesnorkel@gmail.com";
+
 type BookingPayload = {
   package?: string;
   name?: string;
@@ -85,9 +87,9 @@ async function sendTelegramNotification(text: string) {
 
 /**
  * Sends the customer's "Booking Confirmed" email via Gmail SMTP, a separate
- * internal "New Booking Received" email to the agency's own Gmail inbox
- * (same GMAIL_USER account, so the customer never sees it), and notifies
- * the agency's Telegram chat — all three run concurrently and independently
+ * internal "New Booking Received" email to the agency's monitored inbox
+ * (AGENCY_NOTIFICATION_EMAIL), and notifies the agency's Telegram chat —
+ * all three run concurrently and independently
  * (one failing doesn't block the others or the booking UI from showing
  * success).
  *
@@ -299,10 +301,9 @@ async function sendCustomerConfirmationEmail({
 }
 
 /**
- * Notifies the agency's own inbox of a new booking. Sent from and to the
- * same Gmail account (GMAIL_USER) already used for the customer email, so
- * it needs no extra secrets or env vars — reusing GMAIL_USER as the
- * recipient also means this stays in sync if that address ever changes.
+ * Notifies the agency's inbox of a new booking. Sent from GMAIL_USER (the
+ * account with SMTP credentials) to AGENCY_NOTIFICATION_EMAIL, which is a
+ * separate, non-Gmail address the agency actually monitors.
  */
 async function sendInternalBookingNotification({
   detailRows,
@@ -356,7 +357,7 @@ async function sendInternalBookingNotification({
 
     await transporter.sendMail({
       from: `"Mirissa Whale Snorkel" <${gmailUser}>`,
-      to: gmailUser,
+      to: AGENCY_NOTIFICATION_EMAIL,
       subject: "New Booking Received - Mirissa Whale Snorkel",
       text: textBody,
       html: htmlBody,
