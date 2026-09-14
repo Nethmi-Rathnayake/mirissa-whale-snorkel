@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 export const runtime = "nodejs";
 
-const AGENCY_NOTIFICATION_EMAIL = "whalesnorkel@gmail.com";
+const AGENCY_NOTIFICATION_EMAIL = "mirissawhalesnorkel@proton.me";
 
 type BookingPayload = {
   package?: string;

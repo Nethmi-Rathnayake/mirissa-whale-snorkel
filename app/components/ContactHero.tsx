@@ -12,8 +12,8 @@ const QUICK_CONTACT = [
   {
     icon: MailIcon,
     label: "Email Us",
-    value: "whalesnorkel@gmail.com",
-    href: "mailto:whalesnorkel@gmail.com",
+    value: "mirissawhalesnorkel@proton.me",
+    href: "mailto:mirissawhalesnorkel@proton.me",
   },
   {
     icon: PinIcon,

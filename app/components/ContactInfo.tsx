@@ -15,8 +15,8 @@ const ROWS = [
   {
     icon: MailIcon,
     label: "Email",
-    lines: ["whalesnorkel@gmail.com"],
-    href: "mailto:whalesnorkel@gmail.com",
+    lines: ["mirissawhalesnorkel@proton.me"],
+    href: "mailto:mirissawhalesnorkel@proton.me",
   },
 ];
 

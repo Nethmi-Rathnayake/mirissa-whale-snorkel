@@ -75,7 +75,7 @@ const localBusinessJsonLd = {
   url: SITE_URL,
   image: `${SITE_URL}${defaultOpenGraphImage.url}`,
   telephone: "+94764875498",
-  email: "whalesnorkel@gmail.com",
+  email: "mirissawhalesnorkel@proton.me",
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: averageRating.toFixed(1),
