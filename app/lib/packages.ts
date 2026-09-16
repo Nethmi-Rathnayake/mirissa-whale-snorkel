@@ -46,6 +46,7 @@ export type TourPackage = {
   sections: PackageSection[];
   topics: { label: string; anchor: string }[];
   videos?: { src: string; label: string }[];
+  relatedLinks?: { label: string; href: string }[];
 };
 
 const PAYMENTS_TEXT =
@@ -195,6 +196,17 @@ export const packages: TourPackage[] = [
       { label: "Is Whale Sighting Guaranteed?", anchor: "sighting-guaranteed" },
       { label: "Payments", anchor: "payments" },
     ],
+    relatedLinks: [
+      {
+        label: "Best time for whale watching in Mirissa",
+        href: "/guides/best-time-to-see-whales-in-mirissa",
+      },
+      {
+        label: "Compare snorkeling experiences in Mirissa",
+        href: "/snorkeling-in-mirissa",
+      },
+      { label: "See full pricing comparison", href: "/pricing" },
+    ],
   },
   {
     slug: "whale-watching",
@@ -306,6 +318,17 @@ export const packages: TourPackage[] = [
       { label: "Transportation", anchor: "transportation" },
       { label: "Payments", anchor: "payments" },
     ],
+    relatedLinks: [
+      {
+        label: "Best time for whale watching in Mirissa",
+        href: "/guides/best-time-to-see-whales-in-mirissa",
+      },
+      {
+        label: "What to expect on a whale watching tour",
+        href: "/guides/what-to-expect-whale-watching-mirissa",
+      },
+      { label: "See full pricing comparison", href: "/pricing" },
+    ],
   },
   {
     slug: "dolphin-watching",
@@ -374,6 +397,12 @@ export const packages: TourPackage[] = [
       { label: "Transportation", anchor: "transportation" },
       { label: "Payments", anchor: "payments" },
       { label: "Special Tip", anchor: "special-tip" },
+    ],
+    relatedLinks: [
+      {
+        label: "Best time for whale watching in Mirissa",
+        href: "/guides/best-time-to-see-whales-in-mirissa",
+      },
     ],
   },
   {
@@ -524,6 +553,12 @@ export const packages: TourPackage[] = [
       { label: "Meeting & Pickup", anchor: "meeting-pickup" },
       { label: "Schedule & Duration", anchor: "schedule" },
       { label: "Payments", anchor: "payments" },
+    ],
+    relatedLinks: [
+      {
+        label: "Compare snorkeling experiences in Mirissa",
+        href: "/snorkeling-in-mirissa",
+      },
     ],
   },
   {
@@ -745,6 +780,12 @@ export const packages: TourPackage[] = [
       { label: "Turtle Safety Guidelines", anchor: "guidelines" },
       { label: "Transportation", anchor: "transportation" },
       { label: "Payments", anchor: "payments" },
+    ],
+    relatedLinks: [
+      {
+        label: "Compare snorkeling experiences in Mirissa",
+        href: "/snorkeling-in-mirissa",
+      },
     ],
   },
   {
@@ -1046,4 +1087,19 @@ export const packages: TourPackage[] = [
 
 export function getPackageBySlug(slug: string) {
   return packages.find((pkg) => pkg.slug === slug);
+}
+
+export function getPackageOffer(pkg: TourPackage) {
+  return pkg.price.kind === "flat"
+    ? ({
+        "@type": "Offer",
+        price: pkg.price.price,
+        priceCurrency: "USD",
+      } as const)
+    : ({
+        "@type": "AggregateOffer",
+        lowPrice: Math.min(...pkg.price.tiers.map((tier) => tier.price)),
+        highPrice: Math.max(...pkg.price.tiers.map((tier) => tier.price)),
+        priceCurrency: "USD",
+      } as const);
 }

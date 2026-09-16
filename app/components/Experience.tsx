@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRightIcon } from "./icons";
 
 const FEATURES = [
@@ -68,13 +69,13 @@ export default function Experience() {
             ))}
           </div>
 
-          <a
+          <Link
             href="/about"
             className="group mt-10 inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3.5 font-inter text-xs font-semibold uppercase tracking-[0.14em] text-white transition-colors hover:bg-accent-dark"
           >
             More Our Experiences
             <ArrowRightIcon className="transition-transform duration-200 group-hover:translate-x-1" />
-          </a>
+          </Link>
         </div>
 
         <div className="relative mx-auto w-full max-w-md pb-10 pl-8 sm:pb-16 sm:pl-14 lg:max-w-none">

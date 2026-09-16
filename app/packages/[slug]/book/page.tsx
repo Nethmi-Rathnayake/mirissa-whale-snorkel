@@ -7,7 +7,7 @@ import Footer from "../../../components/Footer";
 import BookingForm from "../../../components/BookingForm";
 import { ArrowRightIcon } from "../../../components/icons";
 import { getPackageBySlug, packages } from "../../../lib/packages";
-import { buildSocialMetadata } from "../../../lib/seo";
+import { buildBreadcrumbJsonLd, buildSocialMetadata } from "../../../lib/seo";
 
 export function generateStaticParams() {
   return packages.map((pkg) => ({ slug: pkg.slug }));
@@ -51,8 +51,19 @@ export default async function BookPackagePage({
     notFound();
   }
 
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Packages", path: "/packages" },
+    { name: pkg.name, path: `/packages/${pkg.slug}` },
+    { name: "Book", path: `/packages/${pkg.slug}/book` },
+  ]);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Header />
       <main className="flex-1">
         <section className="relative flex h-[46vh] min-h-[380px] w-full items-end overflow-hidden">

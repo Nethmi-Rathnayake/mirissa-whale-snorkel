@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
@@ -33,6 +34,32 @@ export default function Home() {
           <Stats />
         </Reveal>
         <Packages />
+        <div className="bg-ivory px-6 pb-20 text-center sm:pb-24 lg:px-16">
+          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-body">
+            Planning ahead? Read our guide to the{" "}
+            <Link
+              href="/guides/best-time-to-see-whales-in-mirissa"
+              className="font-semibold text-accent hover:text-accent-dark"
+            >
+              best time for whale watching in Mirissa
+            </Link>{" "}
+            or compare every{" "}
+            <Link
+              href="/snorkeling-in-mirissa"
+              className="font-semibold text-accent hover:text-accent-dark"
+            >
+              snorkeling experience in Mirissa
+            </Link>{" "}
+            and see{" "}
+            <Link
+              href="/pricing"
+              className="font-semibold text-accent hover:text-accent-dark"
+            >
+              full pricing
+            </Link>{" "}
+            for every tour.
+          </p>
+        </div>
         <Reveal>
           <Testimonials />
         </Reveal>

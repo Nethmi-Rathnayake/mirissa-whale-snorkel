@@ -5,7 +5,7 @@ import AboutHero from "../components/AboutHero";
 import AboutJourney from "../components/AboutJourney";
 import AboutCrew from "../components/AboutCrew";
 import AboutSustainability from "../components/AboutSustainability";
-import { buildSocialMetadata } from "../lib/seo";
+import { buildBreadcrumbJsonLd, buildSocialMetadata } from "../lib/seo";
 
 const TITLE = "About Us";
 const DESCRIPTION =
@@ -20,9 +20,18 @@ export const metadata: Metadata = {
   ...buildSocialMetadata(TITLE, DESCRIPTION, "/about"),
 };
 
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+]);
+
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Header />
       <main className="flex-1">
         <AboutHero />

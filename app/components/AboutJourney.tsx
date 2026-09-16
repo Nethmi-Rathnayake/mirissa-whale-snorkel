@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRightIcon } from "./icons";
 
 export default function AboutJourney() {
@@ -18,8 +19,14 @@ export default function AboutJourney() {
           </h2>
           <p className="mt-6 leading-relaxed text-body">
             What began as a small research initiative mapping the migratory
-            routes of blue whales off the southern coast of Sri Lanka has
-            evolved into a leading advocate for marine conservation and
+            routes of blue whales off the{" "}
+            <Link
+              href="/guides/whale-watching-sri-lanka"
+              className="font-semibold text-ink underline decoration-border underline-offset-2 transition-colors hover:text-accent"
+            >
+              southern coast of Sri Lanka
+            </Link>{" "}
+            has evolved into a leading advocate for marine conservation and
             sustainable ecotourism.
           </p>
           <p className="mt-4 leading-relaxed text-body">
@@ -29,13 +36,13 @@ export default function AboutJourney() {
             encounters with absolute respect for the animals and their
             environment.
           </p>
-          <a
-            href="#"
+          <Link
+            href="/conservation"
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-cream px-6 py-3 text-sm font-semibold text-ink transition-colors hover:bg-border"
           >
             Read Our Manifesto
             <ArrowRightIcon />
-          </a>
+          </Link>
         </div>
 
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl">

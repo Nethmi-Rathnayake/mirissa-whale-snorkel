@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { IconKey, TourPackage } from "../lib/packages";
 import Accordion from "./Accordion";
+import PriceDisplay from "./PriceDisplay";
 import { ArrowRightIcon, CardIcon, ClockIcon, PinIcon, VesselIcon } from "./icons";
 
 const SIDEBAR_ICONS: Record<IconKey, typeof VesselIcon> = {
@@ -75,7 +76,12 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
             <p className="leading-relaxed text-body">{pkg.description}</p>
 
             <div className="mt-10">
-              <Accordion items={pkg.sections} />
+              <h2 className="text-lg font-semibold tracking-tight">
+                Tour Details
+              </h2>
+              <div className="mt-5">
+                <Accordion items={pkg.sections} />
+              </div>
             </div>
 
             {pkg.videos && pkg.videos.length > 0 && (
@@ -100,6 +106,27 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
               </div>
             )}
 
+            {pkg.relatedLinks && pkg.relatedLinks.length > 0 && (
+              <div className="mt-12 border-t border-border/70 pt-8">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.1em] text-body">
+                  Helpful Guides
+                </h2>
+                <ul className="mt-4 flex flex-col gap-2.5">
+                  {pkg.relatedLinks.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-dark"
+                      >
+                        {link.label}
+                        <ArrowRightIcon />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <Link
               href="/packages"
               className="mt-10 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] transition-colors hover:text-accent"
@@ -112,51 +139,7 @@ export default function PackageDetail({ pkg }: { pkg: TourPackage }) {
           <div className="lg:col-span-1">
             <div className="rounded-3xl border border-border/80 bg-white p-8 shadow-sm lg:sticky lg:top-28">
               <div id="price" className="scroll-mt-28 text-center">
-                {pkg.price.kind === "flat" ? (
-                  <>
-                    <span className="text-4xl font-bold tracking-tight">
-                      <span className="mr-1 align-top text-lg font-semibold text-body">
-                        USD
-                      </span>
-                      {pkg.price.price}
-                    </span>
-                    <p className="mt-1 text-xs uppercase tracking-[0.1em] text-body">
-                      {pkg.price.unit}
-                    </p>
-                    {pkg.price.note && (
-                      <p className="mt-3 text-sm leading-relaxed text-ink/85">
-                        {pkg.price.note}
-                      </p>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    <p className="text-xs font-semibold uppercase tracking-[0.1em] text-body">
-                      Total Price
-                    </p>
-                    <ul className="mt-3 flex flex-col gap-2">
-                      {pkg.price.tiers.map((tier) => (
-                        <li
-                          key={tier.persons}
-                          className="flex items-center justify-between rounded-xl bg-cream/70 px-4 py-2.5"
-                        >
-                          <span className="text-sm text-ink/85">
-                            {tier.persons}
-                          </span>
-                          <span className="text-lg font-bold tracking-tight">
-                            <span className="mr-1 text-xs font-semibold text-body">
-                              USD
-                            </span>
-                            {tier.price}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="mt-4 text-left text-sm leading-relaxed text-ink/85">
-                      {pkg.price.note}
-                    </p>
-                  </>
-                )}
+                <PriceDisplay price={pkg.price} />
               </div>
 
               <div className="mt-8 flex flex-col gap-6 border-t border-border pt-8">

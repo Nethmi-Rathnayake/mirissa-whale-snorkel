@@ -6,7 +6,7 @@ import ContactHero from "../components/ContactHero";
 import ContactForm from "../components/ContactForm";
 import ContactInfo from "../components/ContactInfo";
 import { CameraIcon, PlayIcon, ShareIcon } from "../components/icons";
-import { buildSocialMetadata } from "../lib/seo";
+import { buildBreadcrumbJsonLd, buildSocialMetadata } from "../lib/seo";
 
 const TITLE = "Contact";
 const DESCRIPTION =
@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   ...buildSocialMetadata(TITLE, DESCRIPTION, "/contact"),
 };
 
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Contact", path: "/contact" },
+]);
+
 const SOCIAL_LINKS = [
   { icon: CameraIcon, label: "Instagram" },
   { icon: ShareIcon, label: "Facebook" },
@@ -30,6 +35,10 @@ const SOCIAL_LINKS = [
 export default function ContactPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Header />
       <main className="flex-1">
         <ContactHero />

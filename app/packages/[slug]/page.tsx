@@ -3,12 +3,31 @@ import { notFound } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import PackageDetail from "../../components/PackageDetail";
-import { getPackageBySlug, packages } from "../../lib/packages";
-import { SITE_URL, buildSocialMetadata } from "../../lib/seo";
+import { getPackageBySlug, getPackageOffer, packages } from "../../lib/packages";
+import {
+  SITE_URL,
+  buildBreadcrumbJsonLd,
+  buildSocialMetadata,
+} from "../../lib/seo";
 
 export function generateStaticParams() {
   return packages.map((pkg) => ({ slug: pkg.slug }));
 }
+
+/**
+ * Sharper, intent-differentiated descriptions for the three whale/dolphin
+ * packages, since these are the pages most likely to compete for overlapping
+ * "whale watching Mirissa" style searches. Every other package falls back to
+ * its own `tagline`, which is already sufficiently distinct.
+ */
+const SEO_DESCRIPTIONS: Partial<Record<string, string>> = {
+  "whale-snorkeling":
+    "Swim alongside blue and sperm whales on a guided, in-water snorkel tour in Mirissa. Small groups and experienced guides included.",
+  "whale-watching":
+    "Watch blue whales and dolphins surface and dive from the boat deck on our Whale Watching Tour in Mirissa — no swimming required.",
+  "dolphin-watching":
+    "Follow large pods of dolphins on a relaxed morning boat trip in Mirissa — the same boat and schedule as our Whale Watching Tour.",
+};
 
 export async function generateMetadata({
   params,
@@ -23,13 +42,16 @@ export async function generateMetadata({
     };
   }
 
+  const title = `${pkg.name} in Mirissa`;
+  const description = SEO_DESCRIPTIONS[pkg.slug] ?? pkg.tagline;
+
   return {
-    title: pkg.name,
-    description: pkg.tagline,
+    title,
+    description,
     alternates: {
       canonical: `/packages/${pkg.slug}`,
     },
-    ...buildSocialMetadata(pkg.name, pkg.tagline, `/packages/${pkg.slug}`, [
+    ...buildSocialMetadata(title, description, `/packages/${pkg.slug}`, [
       { url: pkg.heroImage, alt: pkg.heroImageAlt },
     ]),
   };
@@ -45,48 +67,20 @@ export default async function PackagePage({
     notFound();
   }
 
-  const offers =
-    pkg.price.kind === "flat"
-      ? {
-          "@type": "Offer",
-          price: pkg.price.price,
-          priceCurrency: "USD",
-        }
-      : {
-          "@type": "AggregateOffer",
-          lowPrice: Math.min(...pkg.price.tiers.map((tier) => tier.price)),
-          highPrice: Math.max(...pkg.price.tiers.map((tier) => tier.price)),
-          priceCurrency: "USD",
-        };
-
   const touristTripJsonLd = {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
     name: pkg.name,
     description: pkg.description,
     image: `${SITE_URL}${pkg.heroImage}`,
-    offers,
+    offers: getPackageOffer(pkg),
   };
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Packages",
-        item: `${SITE_URL}/packages`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: pkg.name,
-        item: `${SITE_URL}/packages/${pkg.slug}`,
-      },
-    ],
-  };
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Packages", path: "/packages" },
+    { name: pkg.name, path: `/packages/${pkg.slug}` },
+  ]);
 
   return (
     <>

@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GalleryHero from "../components/GalleryHero";
 import GalleryGrid from "../components/GalleryGrid";
-import { buildSocialMetadata } from "../lib/seo";
+import { buildBreadcrumbJsonLd, buildSocialMetadata } from "../lib/seo";
 
 const TITLE = "Gallery";
 const DESCRIPTION =
@@ -18,9 +18,18 @@ export const metadata: Metadata = {
   ...buildSocialMetadata(TITLE, DESCRIPTION, "/gallery"),
 };
 
+const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+  { name: "Home", path: "/" },
+  { name: "Gallery", path: "/gallery" },
+]);
+
 export default function GalleryPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Header />
       <main className="flex-1 bg-ivory">
         <GalleryHero />

@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
-import type { FaqCategory } from "../lib/faq";
+import type { FaqCategory, FaqQuestion } from "../lib/faq";
 import { ArrowRightIcon, ChevronDownIcon, LifeBuoyIcon } from "./icons";
 
 export default function FaqExplorer({
@@ -123,7 +123,7 @@ function FaqItem({
   isOpen,
   onToggle,
 }: {
-  item: { id: string; question: string; answer: string };
+  item: FaqQuestion;
   isOpen: boolean;
   onToggle: () => void;
 }) {
@@ -151,6 +151,15 @@ function FaqItem({
       </h3>
       <div id={panelId} hidden={!isOpen} className="px-6 pb-5">
         <p className="text-sm leading-relaxed text-body">{item.answer}</p>
+        {item.relatedLink && (
+          <Link
+            href={item.relatedLink.href}
+            className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-dark"
+          >
+            {item.relatedLink.label}
+            <ArrowRightIcon />
+          </Link>
+        )}
       </div>
     </div>
   );

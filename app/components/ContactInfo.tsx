@@ -1,4 +1,5 @@
-import { MailIcon, PhoneIcon, PinIcon } from "./icons";
+import Link from "next/link";
+import { ArrowRightIcon, MailIcon, PhoneIcon, PinIcon } from "./icons";
 
 const ROWS = [
   {
@@ -61,6 +62,14 @@ export default function ContactInfo() {
           </div>
         ))}
       </div>
+
+      <Link
+        href="/guides/getting-to-mirissa"
+        className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors hover:text-white/80"
+      >
+        Not sure how to get here? See our travel guide
+        <ArrowRightIcon />
+      </Link>
     </div>
   );
 }

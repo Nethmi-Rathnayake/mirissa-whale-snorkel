@@ -8,6 +8,7 @@ import {
   buildSocialMetadata,
   defaultOpenGraphImage,
 } from "./lib/seo";
+import { packages } from "./lib/packages";
 import { testimonials } from "./lib/testimonials";
 import "./globals.css";
 
@@ -68,6 +69,14 @@ const averageRating =
   testimonials.reduce((sum, t) => sum + parseFloat(t.rating), 0) /
   testimonials.length;
 
+const allPrices = packages.flatMap((pkg) =>
+  pkg.price.kind === "flat"
+    ? [pkg.price.price]
+    : pkg.price.tiers.map((tier) => tier.price)
+);
+const lowestPrice = Math.min(...allPrices);
+const highestPrice = Math.max(...allPrices);
+
 const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -76,6 +85,11 @@ const localBusinessJsonLd = {
   image: `${SITE_URL}${defaultOpenGraphImage.url}`,
   telephone: "+94764875498",
   email: "mirissawhalesnorkel@proton.me",
+  priceRange: `USD ${lowestPrice}-${highestPrice}`,
+  areaServed: {
+    "@type": "City",
+    name: "Mirissa",
+  },
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: averageRating.toFixed(1),
@@ -104,6 +118,13 @@ const localBusinessJsonLd = {
   },
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -114,6 +135,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <ScrollToTop />
         {children}

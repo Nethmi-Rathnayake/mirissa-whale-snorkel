@@ -48,3 +48,25 @@ export function buildSocialMetadata(
     },
   };
 }
+
+export type BreadcrumbItem = { name: string; path: string };
+
+/**
+ * `path` values must start with "/" (e.g. "/" for the homepage, "/packages"
+ * for a section) so the resulting `item` URL matches the page's own
+ * canonical URL exactly. The homepage is special-cased to drop the trailing
+ * slash, matching how Next resolves `alternates.canonical: "/"` against
+ * `metadataBase` elsewhere in this app.
+ */
+export function buildBreadcrumbJsonLd(items: BreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.path === "/" ? SITE_URL : `${SITE_URL}${item.path}`,
+    })),
+  };
+}

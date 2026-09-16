@@ -310,6 +310,11 @@ export default function GalleryGrid() {
   return (
     <section className="bg-ivory pb-24 pt-16 sm:pb-28 sm:pt-20">
       <div className="px-6 lg:px-16">
+        <p className="mb-6 max-w-2xl text-sm leading-relaxed text-body sm:mb-8">
+          Every photo and video below comes from one of our tours — filter
+          by experience to see a specific trip, or browse everything at
+          once.
+        </p>
         <div className="mb-8 flex flex-wrap gap-2 sm:mb-10">
           {FILTERS.map((filter) => (
             <button

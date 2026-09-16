@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { DataIcon, LeafIcon } from "./icons";
+import Link from "next/link";
+import { ArrowRightIcon, DataIcon, LeafIcon } from "./icons";
 
 const FEATURES = [
   {
@@ -46,6 +47,14 @@ export default function AboutSustainability() {
               </div>
             ))}
           </div>
+
+          <Link
+            href="/conservation"
+            className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-accent transition-colors hover:text-accent-dark"
+          >
+            Read our full approach to conservation
+            <ArrowRightIcon />
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
