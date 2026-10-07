@@ -11,19 +11,56 @@ const labelClasses =
 
 export default function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   return (
     <div className="rounded-3xl border border-border/80 bg-white p-8 shadow-sm sm:p-10">
       <h2 className="text-2xl font-bold tracking-tight">Send a Message</h2>
 
       <form
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          setSubmitted(true);
-          e.currentTarget.reset();
+          setErrorMessage("");
+          setSubmitted(false);
+          setSending(true);
+
+          const form = e.currentTarget;
+          const payload = Object.fromEntries(new FormData(form).entries());
+
+          try {
+            const response = await fetch("/api/contact", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            const result = await response.json().catch(() => ({}));
+
+            if (!response.ok || !result.success) {
+              setErrorMessage(
+                result.message || "Something went wrong. Please try again."
+              );
+              return;
+            }
+
+            setSubmitted(true);
+            form.reset();
+          } catch {
+            setErrorMessage("Something went wrong. Please try again.");
+          } finally {
+            setSending(false);
+          }
         }}
         className="mt-8 flex flex-col gap-6"
       >
+        <input
+          type="checkbox"
+          name="botcheck"
+          tabIndex={-1}
+          autoComplete="off"
+          className="hidden"
+          aria-hidden="true"
+        />
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="flex flex-col gap-2">
             <label htmlFor="first-name" className={labelClasses}>
@@ -97,11 +134,17 @@ export default function ContactForm() {
         <div className="flex items-center gap-4">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-ivory transition-colors hover:bg-ink/85"
+            disabled={sending}
+            className="inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-ivory transition-colors hover:bg-ink/85 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Send Message
+            {sending ? "Sending..." : "Send Message"}
             <ArrowRightIcon />
           </button>
+          {errorMessage && (
+            <p role="alert" className="text-sm text-red-700">
+              {errorMessage}
+            </p>
+          )}
           {submitted && (
             <p role="status" className="text-sm text-body">
               Thanks — we&rsquo;ll be in touch shortly.

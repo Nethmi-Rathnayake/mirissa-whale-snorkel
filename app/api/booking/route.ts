@@ -31,6 +31,14 @@ const REQUIRED_FIELDS = [
   "bookingTime",
 ] as const satisfies readonly (keyof BookingPayload)[];
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 function formatDate(dateStr: string) {
   const [y, m, d] = dateStr.split("-").map(Number);
   if (!y || !m || !d) return dateStr;
@@ -93,13 +101,8 @@ async function sendTelegramNotification(text: string) {
  * (one failing doesn't block the others or the booking UI from showing
  * success).
  *
- * The Web3Forms agency-email notification is sent separately, client-side,
- * directly to Web3Forms — its free-tier API rejects server-to-server calls
- * ("Use our API in client side or contact support with server IP address
- * (Pro plan is required)"), so it can't be moved here. The customer email,
- * internal email, and Telegram message all need real secrets (SMTP
- * credential, bot token) that must never reach the browser, so they run
- * here instead.
+ * The booking counts as successful when the agency was notified (internal
+ * email or Telegram); the customer email failing alone doesn't fail it.
  */
 export async function POST(request: Request) {
   let payload: BookingPayload;
@@ -209,8 +212,19 @@ export async function POST(request: Request) {
     console.error("Telegram notification failed:", telegramResult.reason);
   }
 
+  if (!internalEmailOk && !telegramOk) {
+    return Response.json(
+      {
+        success: false,
+        message:
+          "We couldn't send your booking right now. Please try again or contact us directly.",
+      },
+      { status: 502 }
+    );
+  }
+
   return Response.json({
-    success: emailOk,
+    success: true,
     emailSent: emailOk,
     internalEmailSent: internalEmailOk,
     telegramSent: telegramOk,
@@ -257,8 +271,8 @@ async function sendCustomerConfirmationEmail({
       .map(
         ([label, value]) => `
           <tr>
-            <td style="padding:10px 16px;border-bottom:1px solid #e6ddcf;color:#6c6259;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;">${label}</td>
-            <td style="padding:10px 16px;border-bottom:1px solid #e6ddcf;color:#211710;font-size:14px;">${value}</td>
+            <td style="padding:10px 16px;border-bottom:1px solid #e6ddcf;color:#6c6259;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;">${escapeHtml(label)}</td>
+            <td style="padding:10px 16px;border-bottom:1px solid #e6ddcf;color:#211710;font-size:14px;">${escapeHtml(value)}</td>
           </tr>`
       )
       .join("");
@@ -272,7 +286,7 @@ async function sendCustomerConfirmationEmail({
           <div style="padding:28px;">
             <h1 style="margin:0 0 12px;color:#211710;font-size:20px;">Booking Confirmed</h1>
             <p style="margin:0 0 16px;color:#6c6259;font-size:14px;line-height:1.6;">
-              Hi ${name}, your booking has been successfully received and confirmed.
+              Hi ${escapeHtml(name)}, your booking has been successfully received and confirmed.
               Our team will arrange your pickup and meeting at the confirmed date, time and location below.
             </p>
             <table style="width:100%;border-collapse:collapse;margin-top:8px;">
@@ -334,8 +348,8 @@ async function sendInternalBookingNotification({
       .map(
         ([label, value]) => `
           <tr>
-            <td style="padding:10px 16px;border-bottom:1px solid #e6ddcf;color:#6c6259;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;">${label}</td>
-            <td style="padding:10px 16px;border-bottom:1px solid #e6ddcf;color:#211710;font-size:14px;">${value}</td>
+            <td style="padding:10px 16px;border-bottom:1px solid #e6ddcf;color:#6c6259;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;">${escapeHtml(label)}</td>
+            <td style="padding:10px 16px;border-bottom:1px solid #e6ddcf;color:#211710;font-size:14px;">${escapeHtml(value)}</td>
           </tr>`
       )
       .join("");

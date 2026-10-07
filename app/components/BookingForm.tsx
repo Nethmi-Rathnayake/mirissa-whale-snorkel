@@ -6,8 +6,6 @@ import DatePickerField from "./DatePickerField";
 import TimePickerField from "./TimePickerField";
 import { ArrowRightIcon } from "./icons";
 
-const WEB3FORMS_ACCESS_KEY = "2c890c93-9ee1-403d-93fd-cce148e2e4d6";
-
 const fieldClasses =
   "w-full rounded-xl border border-border bg-cream/50 px-4 py-3 text-sm text-ink placeholder:text-body/70 focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/30";
 
@@ -64,42 +62,19 @@ export default function BookingForm({ packageName }: { packageName: string }) {
           const formData = new FormData(form);
           const payload = Object.fromEntries(formData.entries());
 
-          // 1. Notify the agency with the full booking details via Web3Forms.
-          // This must run client-side: Web3Forms' free-tier API rejects
-          // server-to-server submissions.
-          const web3FormData = new FormData(form);
-          web3FormData.append("access_key", WEB3FORMS_ACCESS_KEY);
-          web3FormData.append(
-            "subject",
-            `New Booking Received - Mirissa Whale Snorkel`
-          );
-
           try {
-            const response = await fetch("https://api.web3forms.com/submit", {
+            const response = await fetch("/api/booking", {
               method: "POST",
-              body: web3FormData,
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
             });
-            const result = await response.json();
+            const result = await response.json().catch(() => ({}));
 
             if (!response.ok || !result.success) {
               setErrorMessage(
                 result.message || "Something went wrong. Please try again."
               );
               return;
-            }
-
-            // 2. Send the customer their confirmation email. This goes through
-            // our own server route, since it needs a real SMTP credential that
-            // must never reach the browser. A failure here shouldn't block the
-            // booking itself — the agency has already been notified above.
-            try {
-              await fetch("/api/booking", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-              });
-            } catch (error) {
-              console.error("Customer confirmation email request failed:", error);
             }
 
             setSubmitted(true);
