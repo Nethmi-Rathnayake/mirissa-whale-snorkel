@@ -429,7 +429,7 @@ export const packages: TourPackage[] = [
       kind: "flat",
       price: 45,
       unit: "USD per single dive",
-      note: "2-tank morning dives ($70), night dives ($65) and refresher + 1 dive packages ($55) are also available — see Pricing Options below. Discounts apply when booking 4 or more dives at once.",
+      note: "2-tank morning dives ($80), night dives ($65) and refresher + 1 dive packages ($55) are also available — see Pricing Options below. Discounts apply when booking 4 or more dives at once.",
     },
     sidebarFacts: [
       {
@@ -461,7 +461,7 @@ export const packages: TourPackage[] = [
         defaultOpen: true,
         items: [
           "Single Dive – $45",
-          "2-Tank Dives (Morning) – $70",
+          "2-Tank Dives (Morning) – $80",
           "Night Dive – $65",
           "Refresher + 1 Dive – $55",
         ],
